@@ -339,46 +339,77 @@
   </form>
 
   <table id="kraTable" class="table table-hover align-middle table-bordered table-striped">
-    <thead class="table-dark">
-      <tr>
-        <th>ID</th>
-        <th>KRA Title</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>Sales Growth</td>
-        <td>
-          <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
-    <i class="bi bi-pencil-square"></i>
-  </button>
-  <button class="btn btn-sm btn-outline-danger me-1" title="Delete">
-    <i class="bi bi-trash"></i>
-  </button>
-  <button class="btn btn-sm btn-outline-info" title="History">
-    <i class="bi bi-clock-history"></i>
-  </button>
-        </td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Customer Retention</td>
-        <td>
-          <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
-    <i class="bi bi-pencil-square"></i>
-  </button>
-  <button class="btn btn-sm btn-outline-danger me-1" title="Delete">
-    <i class="bi bi-trash"></i>
-  </button>
-  <button class="btn btn-sm btn-outline-info" title="History">
-    <i class="bi bi-clock-history"></i>
-  </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>KRA Description</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Complete assigned stories/tasks within sprint with ≥ 80% tasks completed on time</td>
+      <td>
+        <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
+          <i class="bi bi-pencil-square"></i>
+        </button>
+        <button class="btn btn-sm btn-outline-danger me-1" title="Delete">
+          <i class="bi bi-trash"></i>
+        </button>
+        <button class="btn btn-sm btn-outline-info" title="History">
+          <i class="bi bi-clock-history"></i>
+        </button>
+      </td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Ensure comprehensive test coverage with ≥ 80% tasks completed on time</td>
+      <td>
+        <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
+          <i class="bi bi-pencil-square"></i>
+        </button>
+        <button class="btn btn-sm btn-outline-danger me-1" title="Delete">
+          <i class="bi bi-trash"></i>
+        </button>
+        <button class="btn btn-sm btn-outline-info" title="History">
+          <i class="bi bi-clock-history"></i>
+        </button>
+      </td>
+    </tr>
+	<tr>
+      <td>3</td>
+      <td>Maintain the codeing standard</td>
+      <td>
+        <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
+          <i class="bi bi-pencil-square"></i>
+        </button>
+        <button class="btn btn-sm btn-outline-danger me-1" title="Delete">
+          <i class="bi bi-trash"></i>
+        </button>
+        <button class="btn btn-sm btn-outline-info" title="History">
+          <i class="bi bi-clock-history"></i>
+        </button>
+      </td>
+    </tr>
+	<tr>
+      <td>4</td>
+      <td>Update the source code in GIT frequently</td>
+      <td>
+        <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
+          <i class="bi bi-pencil-square"></i>
+        </button>
+        <button class="btn btn-sm btn-outline-danger me-1" title="Delete">
+          <i class="bi bi-trash"></i>
+        </button>
+        <button class="btn btn-sm btn-outline-info" title="History">
+          <i class="bi bi-clock-history"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 </div>
         <div class="tab-pane fade" id="document" role="tabpanel">
   <form class="row g-3 mb-4">
@@ -596,7 +627,7 @@
         <button class="accordion-button gradient-card collapsed" type="button" 
                 data-bs-toggle="collapse" data-bs-target="#fyebitda" 
                 aria-expanded="false" aria-controls="fyebitda">
-          <span class="slab-tag">FY EBITDA</span>
+          <span class="slab-tag">Incremental Incentive Allocation</span>
         </button>
       </h2>
       <div id="fyebitda" class="accordion-collapse collapse" 
@@ -614,7 +645,7 @@
             <div class="col-md-4">
               <label for="ebitda_amount_fy" class="form-label">EBITDA Amount</label>
               <input type="number" class="form-control" id="ebitda_amount_fy" 
-                     name="ebitda_amount" maxlength="12" placeholder="Enter EBITDA">
+                     name="ebitda_amount" maxlength="12" placeholder="Enter Incentive Amount">
             </div>
             <div class="col-12 text-end">
               <button type="submit" class="btn btn-primary">
@@ -622,92 +653,367 @@
               </button>
             </div>
           </form>
+<div class="mt-4">
+      <table class="table table-bordered table-striped align-middle text-center">
+        <thead class="table-dark">
+          <tr>
+            <th>Financial Year</th>
+            <th>Incentive Allocation Amount (₹)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>FY 2025–2026</td>
+            <td>2,00,00,000.00</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+		   <!-- Nested Tabs for Department / Role / Designation -->
+          <ul class="nav nav-tabs mb-3" id="allocationTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="dep-tab" data-bs-toggle="tab"
+                      data-bs-target="#dep-tab-pane" type="button" role="tab">Department-wise</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="role-tab" data-bs-toggle="tab"
+                      data-bs-target="#role-tab-pane" type="button" role="tab">Role-wise</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="desig-tab" data-bs-toggle="tab"
+                      data-bs-target="#desig-tab-pane" type="button" role="tab">Designation-wise</button>
+            </li>
+          </ul>
+		   <div class="tab-content" id="allocationTabsContent">
+
+            <!-- Department-wise -->
+            <div class="tab-pane fade show active" id="dep-tab-pane" role="tabpanel" aria-labelledby="dep-tab">
+              <form class="row g-3" name="depEbitdaForm">
+                <div class="col-md-4">
+                  <label for="dep_ebitda_select" class="form-label">Financial Year</label>
+                  <select id="dep_ebitda_select" class="form-select" name="financial_year">
+                    <option selected disabled>Choose FY</option>
+                    <option value="2024-2025">FY 2024-2025</option>
+                    <option value="2025-2026">FY 2025-2026</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="ebitda_amount_dep" class="form-label">EBITDA Amount</label>
+                  <input type="number" class="form-control" id="ebitda_amount_dep"
+                         name="ebitda_amount" maxlength="12" placeholder="EBITDA Amount" disabled >
+                </div>
+                <div class="form-check form-switch col-md-4">
+                  <input class="form-check-input" type="checkbox" id="enableautocalculate_dep">
+                  <label class="form-check-label" for="enableautocalculate_dep">
+                    Auto calculation
+                  </label>
+				  <br>
+				  <label class="form-check-label" for="enableautocalculate_dep">
+                    Total Allocated: 70% |  1,40,00,000.00 
+                  </label>
+				  <br>
+				  <label class="form-check-label" for="enableautocalculate_dep">
+                    Balance: 30% |  60,00,000.00 
+                  </label>
+                </div>
+                <div class="col-12 text-end">
+                  <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-save me-1"></i> Save
+                  </button>
+                </div>
+
+                <div class="col-12 mt-3">
+                  <table id="depEbitdaTable" class="table table-hover align-middle table-bordered table-striped">
+                    <thead class="table-dark">
+                      <tr>
+                        <th>ID</th>
+						<th>FY</th>
+                        <th>Department</th>
+                        <th>% of Profit</th>
+                        <th>Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+						<td>25-26</td>
+                        <td>Tech</td>
+                        <td>20%</td>
+                        <td>
+                            40,00,000.00
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+						<td>25-26</td>
+                        <td>E HR</td>
+                        <td>15%</td>
+                        <td>
+                           30,00,000.00 
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>3</td>
+						<td>25-26</td>
+                        <td>E FIN</td>
+                        <td>25%</td>
+                        <td>
+                           50,00,000.00 
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>4</td>
+						<td>25-26</td>
+                        <td>E INFRA</td>
+                        <td>10%</td>
+                        <td>
+                           20,00,000.00 
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>5</td>
+						<td>25-26</td>
+                        <td>OPS</td>
+                        <td>0%</td>
+                        <td>
+                           0.00 
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>6</td>
+						<td>25-26</td>
+                        <td>E CORP</td>
+                        <td>0%</td>
+                        <td>
+                           0.00 
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </form>
+            </div>
+
+            <!-- Role-wise -->
+            <div class="tab-pane fade" id="role-tab-pane" role="tabpanel" aria-labelledby="role-tab">
+              <form class="row g-3" name="roleEbitdaForm">
+                 <div class="col-md-3">
+                  <label for="dep_ebitda_select" class="form-label">Financial Year</label>
+                  <select id="dep_ebitda_select" class="form-select" name="financial_year">
+                    <option selected disabled>Choose FY</option>
+                    <option value="2024-2025">FY 2024-2025</option>
+                    <option value="2025-2026">FY 2025-2026</option>
+                  </select>
+                </div>
+				<div class="col-md-3">
+                  <label for="dep_ebitda_select" class="form-label">Select Department</label>
+                  <select id="dep_ebitda_select" class="form-select" name="department">
+                    <option selected disabled>Select Department</option>
+                    <option value="2024-2025">Tech</option>
+                    <option value="2025-2026">E HR</option>
+					<option value="2025-2026">E Fin</option>
+					<option value="2025-2026">E Infra</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label for="ebitda_amount_dep" class="form-label">EBITDA Amount</label>
+                  <input type="number" class="form-control" id="ebitda_amount_dep"
+                         name="ebitda_amount" maxlength="12" placeholder="EBITDA Amount" disabled >
+                </div>
+                <div class="form-check form-switch col-md-4">
+                  <input class="form-check-input" type="checkbox" id="enableautocalculate_dep">
+                  <label class="form-check-label" for="enableautocalculate_dep">
+                    Auto calculation
+                  </label>
+				  <br>
+				  <label class="form-check-label" for="enableautocalculate_dep">
+                    Total Allocated: 20% |  40,00,000.00 
+                  </label>
+				  <br>
+				  <label class="form-check-label" for="enableautocalculate_dep">
+                    Balance: 80% |  1,60,00,000.00
+                  </label>
+                </div>
+                <div class="col-12 text-end">
+                  <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-save me-1"></i> Save
+                  </button>
+                </div>
+
+                <div class="col-12 mt-3">
+                  <table id="depEbitdaTable" class="table table-hover align-middle table-bordered table-striped">
+                    <thead class="table-dark">
+                      <tr>
+                        <th>ID</th>
+						<th>FY</th>
+                        <th>Department</th>
+						<th>Role</th>
+                        <th>% of Profit</th>
+                        <th>Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+						<td>25-26</td>
+                        <td>Tech</td>
+						<td>Manager</td>
+                        <td>8%</td>
+                        <td>
+                            16,00,000.00
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+						<td>25-26</td>
+                        <td>Tech</td>
+						<td>TL</td>
+                        <td>6%</td>
+                        <td>
+                           12,00,000.00 
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>3</td>
+						<td>25-26</td>
+                        <td>Tech</td>
+						<td>Developer</td>
+                        <td>4%</td>
+                        <td>
+                           8,00,000.00 
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>4</td>
+						<td>25-26</td>
+                        <td>Tech</td>
+						<td>QA</td>
+                        <td>2%</td>
+                        <td>
+                           4,00,000.00 
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </form>
+            </div>
+
+            <!-- Designation-wise -->
+            <div class="tab-pane fade" id="desig-tab-pane" role="tabpanel" aria-labelledby="desig-tab">
+              <form class="row g-3" name="desigEbitdaForm">
+                <div class="col-md-2">
+                  <label for="dep_ebitda_select" class="form-label">Financial Year</label>
+                  <select id="dep_ebitda_select" class="form-select" name="financial_year">
+                    <option selected disabled>Choose FY</option>
+                    <option value="2024-2025">FY 2024-2025</option>
+                    <option value="2025-2026">FY 2025-2026</option>
+                  </select>
+                </div>
+				<div class="col-md-2">
+                  <label for="dep_ebitda_select" class="form-label">Select Department</label>
+                  <select id="dep_ebitda_select" class="form-select" name="department">
+                    <option selected disabled>Select Department</option>
+                    <option value="2024-2025">Tech</option>
+                    <option value="2025-2026">E HR</option>
+					<option value="2025-2026">E Fin</option>
+					<option value="2025-2026">E Infra</option>
+                  </select>
+                </div>
+				<div class="col-md-2">
+                  <label for="dep_ebitda_select" class="form-label">Select Role</label>
+                  <select id="dep_ebitda_select" class="form-select" name="department">
+                    <option selected disabled>Select Role</option>
+                    <option value="2024-2025">Manager</option>
+                    <option value="2025-2026">TL</option>
+					<option value="2025-2026">Developer</option>
+					<option value="2025-2026">QA</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label for="ebitda_amount_dep" class="form-label">EBITDA Amount</label>
+                  <input type="number" class="form-control" id="ebitda_amount_dep"
+                         name="ebitda_amount" maxlength="12" placeholder="EBITDA Amount" disabled >
+                </div>
+                <div class="form-check form-switch col-md-4">
+                  <input class="form-check-input" type="checkbox" id="enableautocalculate_dep">
+                  <label class="form-check-label" for="enableautocalculate_dep">
+                    Auto calculation
+                  </label>
+				  <br>
+				  <label class="form-check-label" for="enableautocalculate_dep">
+                    Total Allocated: 8% |  16,00,000.00 
+                  </label>
+				  <br>
+				  <label class="form-check-label" for="enableautocalculate_dep">
+                    Balance: 92% |   1,84,00,000.00 
+                  </label>
+                </div>
+                <div class="col-12 text-end">
+                  <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-save me-1"></i> Save
+                  </button>
+                </div>
+
+                <div class="col-12 mt-3">
+                  <table id="depEbitdaTable" class="table table-hover align-middle table-bordered table-striped">
+                    <thead class="table-dark">
+                      <tr>
+                        <th>ID</th>
+						<th>FY</th>
+                        <th>Department</th>
+						<th>Role</th>
+						<th>Designation</th>
+                        <th>% of Profit</th>
+                        <th>Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+						<td>25-26</td>
+                        <td>Tech</td>
+						<td>Manager</td>
+						<td>Junior Manager</td>
+                        <td>2%</td>
+                        <td>
+                            4,00,000.00
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+						<td>25-26</td>
+                        <td>Tech</td>
+						<td>Manager</td>
+						<td>Senior Manager</td>
+                        <td>3%</td>
+                        <td>
+                           6,00,000.00 
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>3</td>
+						<td>25-26</td>
+                        <td>Tech</td>
+						<td>Manager</td>
+						<td>GROUP Manager</td>
+                        <td>3%</td>
+                        <td>
+                           6,00,000.00 
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+			  </form>
+            </div>
+
+          </div>
+		  
         </div>
       </div>
     </div>
-
-    <!-- Type 2: Department-wise EBITDA -->
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingDepEbitda">
-        <button class="accordion-button gradient-card collapsed" type="button" 
-                data-bs-toggle="collapse" data-bs-target="#depebitda" 
-                aria-expanded="false" aria-controls="depebitda">
-          <span class="slab-tag">Department-wise EBITDA</span>
-        </button>
-      </h2>
-      <div id="depebitda" class="accordion-collapse collapse" 
-           aria-labelledby="headingDepEbitda" data-bs-parent="#vcsAccordion">
-        <div class="card card-body">
-          <form class="row g-3" name="depEbitdaForm">
-            <div class="col-md-4">
-              <label for="dep_ebitda_select" class="form-label">Financial Year</label>
-              <select id="dep_ebitda_select" class="form-select" name="financial_year">
-                <option selected disabled>Choose FY</option>
-                <option value="2024-2025">FY 2024-2025</option>
-                <option value="2025-2026">FY 2025-2026</option>
-              </select>
-            </div>
-            <div class="col-md-4">
-              <label for="ebitda_amount_dep" class="form-label">EBITDA Amount</label>
-              <input type="number" class="form-control" id="ebitda_amount_dep" 
-                     name="ebitda_amount" maxlength="12" placeholder="Enter EBITDA">
-            </div>
-            <div class="form-check form-switch col-md-4">
-              <input class="form-check-input" type="checkbox" id="enableautocalculate_dep">
-              <label class="form-check-label" for="enableautocalculate_dep">
-                Auto calculation
-              </label>
-            </div>
-            <div class="col-12 text-end">
-              <button type="submit" class="btn btn-primary">
-                <i class="bi bi-save me-1"></i> Save
-              </button>
-            </div>
-            <div class="col-12 mt-3">
-              <table id="depEbitdaTable" class="table table-hover align-middle table-bordered table-striped">
-                <thead class="table-dark">
-                  <tr>
-                    <th>ID</th>
-                    <th>Department</th>
-                    <th>Percentage</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>IT SW</td>
-                    <td>20%</td>
-                    <td>
-                      <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
-                        <i class="bi bi-pencil-square"></i>
-                      </button>
-                      <button class="btn btn-sm btn-outline-info" title="History">
-                        <i class="bi bi-clock-history"></i>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>IT QA</td>
-                    <td>15%</td>
-                    <td>
-                      <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
-                        <i class="bi bi-pencil-square"></i>
-                      </button>
-                      <button class="btn btn-sm btn-outline-info" title="History">
-                        <i class="bi bi-clock-history"></i>
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-
+   
     <!-- Type 3: Review Period -->
     <div class="accordion-item">
       <h2 class="accordion-header" id="headingReviewPeriod">
@@ -721,16 +1027,37 @@
            aria-labelledby="headingReviewPeriod" data-bs-parent="#vcsAccordion">
         <div class="card card-body">
           <form class="row g-3" name="reviewPeriodForm">
-            <div class="col-md-4">
-              <label for="review_department" class="form-label">Choose Department</label>
-              <select id="review_department" class="form-select" name="department">
-                <option value="" disabled selected>Choose Department</option>
-                <option value="all">ALL</option>
-                <option value="it">IT</option>
-                <option value="hr">Operation</option>
-                <option value="finance">Finance</option>
-              </select>
-            </div>
+		  <div>
+			  <div class="col-md-3">
+				  <input class="form-check-input" type="radio" name="ebitda_option" id="ebitda_yes" value="yes" checked>
+				  <label class="form-check-label" for="ebitda_yes">
+					KRA review
+				  </label>
+				  <input class="form-check-input" type="radio" name="ebitda_option" id="ebitda_no" value="no">
+				  <label class="form-check-label" for="ebitda_no">
+					Performance review
+				  </label>
+				</div>
+		  </div>
+			
+				<div class="col-md-2">
+                  <label for="dep_ebitda_select" class="form-label">Financial Year</label>
+                  <select id="dep_ebitda_select" class="form-select" name="financial_year">
+                    <option selected disabled>Choose FY</option>
+                    <option value="2024-2025">FY 2024-2025</option>
+                    <option value="2025-2026">FY 2025-2026</option>
+                  </select>
+                </div>
+				<div class="col-md-2">
+                  <label for="dep_ebitda_select" class="form-label">Select Department</label>
+                  <select id="dep_ebitda_select" class="form-select" name="department">
+                    <option selected disabled>Select Department</option>
+                    <option value="2024-2025">Tech</option>
+                    <option value="2025-2026">E HR</option>
+					<option value="2025-2026">E Fin</option>
+					<option value="2025-2026">E Infra</option>
+                  </select>
+                </div>
             <div class="col-md-4">
               <label class="form-label">Select Date Range</label>
               <div class="input-group">
@@ -749,16 +1076,20 @@
                 <thead class="table-dark">
                   <tr>
                     <th>ID</th>
+					<th>FY</th>
                     <th>Department</th>
-                    <th>Review month</th>
+					<th>Type</th>
+					<th>Review month</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>1</td>
-                    <td>All</td>
-                    <td>Jan-Feb</td>
+					<td>FY 25-26</td>
+                    <td>Tech</td>
+					<td>KRA review</td>
+                    <td>01-Oct-25 to 30-Nov-25</td>
                     <td>
                       <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
                         <i class="bi bi-pencil-square"></i>
@@ -773,8 +1104,10 @@
                   </tr>
                   <tr>
                     <td>2</td>
-                    <td>Finance</td>
-                    <td>Mar-May</td>
+					<td>FY 25-26</td>
+                    <td>Tech</td>
+					<td>Performance review </td>
+                    <td>01-Jan-26 to 28-Feb-26</td>
                     <td>
                       <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
                         <i class="bi bi-pencil-square"></i>
@@ -801,27 +1134,56 @@
     <button class="accordion-button gradient-card collapsed" type="button" 
             data-bs-toggle="collapse" data-bs-target="#excludeDept" 
             aria-expanded="false" aria-controls="excludeDept">
-      <span class="slab-tag">Excluded Departments</span>
+      <span class="slab-tag">Excluded Departments | Employee</span>
     </button>
   </h2>
   <div id="excludeDept" class="accordion-collapse collapse" 
        aria-labelledby="headingExcludeDept" data-bs-parent="#vcsAccordion">
     <div class="card card-body">
       <form class="row g-3 mb-4" name="excludeDeptForm">
-        <div class="col-md-4">
-          <label for="exclude_department" class="form-label">Choose Department</label>
-          <select id="exclude_department" class="form-select" name="department">
-            <option value="" disabled selected>Choose Department</option>
-            <option value="all">ALL</option>
-            <option value="it">IT</option>
-            <option value="hr">Operation</option>
-            <option value="finance">Finance</option>
-          </select>
-        </div>
-        <div class="col-md-4">
-          <label for="exclude_year" class="form-label text-muted">FY Year</label>
-          <input class="form-control" id="exclude_year" placeholder="2025" disabled>
-        </div>
+	  <div>
+			  <div class="col-md-4">
+				  <input class="form-check-input" type="radio" name="ebitda_option" id="ebitda_yes" value="yes" checked>
+				  <label class="form-check-label" for="ebitda_yes">
+					Exclude Department
+				  </label>
+				  <input class="form-check-input" type="radio" name="ebitda_option" id="ebitda_no" value="no">
+				  <label class="form-check-label" for="ebitda_no">
+					Exclude Employee
+				  </label>
+				</div>
+		  </div>
+        <div class="col-md-3">
+                  <label for="dep_ebitda_select" class="form-label">Financial Year</label>
+                  <select id="dep_ebitda_select" class="form-select" name="financial_year">
+                    <option selected disabled>Choose FY</option>
+                    <option value="2024-2025">FY 2024-2025</option>
+                    <option value="2025-2026">FY 2025-2026</option>
+                  </select>
+                </div>
+				<div class="col-md-3">
+                  <label for="dep_ebitda_select" class="form-label">Select Department</label>
+                  <select id="dep_ebitda_select" class="form-select" name="department">
+                    <option selected disabled>Select Department</option>
+                    <option value="2024-2025">Tech</option>
+                    <option value="2025-2026">E HR</option>
+					<option value="2025-2026">E Fin</option>
+					<option value="2025-2026">E Infra</option>
+                  </select>
+                </div>
+				<div class="col-md-3">
+                  <label for="dep_ebitda_select" class="form-label">Select Role</label>
+                  <select id="dep_ebitda_select" class="form-select" name="role" disabled>
+                    <option selected disabled>Select Role</option>
+                     
+                  </select>
+                </div>
+				<div class="col-md-3">
+                  <label for="dep_ebitda_select" class="form-label">Select Employee</label>
+                  <select id="dep_ebitda_select" class="form-select" name="employee" disabled>
+                    <option selected disabled>Select Employee</option>
+                  </select>
+                </div>
         <div class="col-12 text-end">
           <button type="submit" class="btn btn-primary">
             <i class="bi bi-save me-1"></i> Save
@@ -832,16 +1194,18 @@
             <thead class="table-dark">
               <tr>
                 <th>ID</th>
-                <th>Department</th>
-                <th>Exclude Year</th>
+                <th>FY</th>
+                <th>Exclude</th>
+				<th>Name</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>1</td>
-                <td>ECS</td>
-                <td>2025</td>
+				<td>FY 25-26</td>
+				<td>Department</td>
+                <td>E Fin</td>
                 <td>
                   <button class="btn btn-sm btn-outline-danger" title="Delete">
                     <i class="bi bi-trash"></i>
@@ -850,8 +1214,9 @@
               </tr>
               <tr>
                 <td>2</td>
-                <td>PCS</td>
-                <td>2025</td>
+				<td>FY 25-26</td>
+                <td>Employee</td>
+                <td>E Fin - Manager - 8321</td>
                 <td>
                   <button class="btn btn-sm btn-outline-danger" title="Delete">
                     <i class="bi bi-trash"></i>
@@ -866,99 +1231,8 @@
   </div>
 </div>
 
-<!-- Type 5: On-Hold Employees -->
-<div class="accordion-item">
-  <h2 class="accordion-header" id="headingHoldEmp">
-    <button class="accordion-button gradient-card collapsed" type="button" 
-            data-bs-toggle="collapse" data-bs-target="#holdEmployee" 
-            aria-expanded="false" aria-controls="holdEmployee">
-      <span class="slab-tag">On-Hold Employees</span>
-    </button>
-  </h2>
-  <div id="holdEmployee" class="accordion-collapse collapse" 
-       aria-labelledby="headingHoldEmp" data-bs-parent="#vcsAccordion">
-    <div class="card card-body">
-      <form class="row g-3 mb-4" name="holdEmpForm">
-        <div class="col-md-4">
-          <label for="hold_department" class="form-label">Choose Department</label>
-          <select id="hold_department" class="form-select" name="department">
-            <option value="" disabled selected>Choose Department</option>
-            <option value="it">IT</option>
-            <option value="hr">Operation</option>
-            <option value="finance">Finance</option>
-          </select>
-        </div>
-        <div class="col-md-4">
-          <label for="hold_employee" class="form-label">Choose Employee</label>
-          <select id="hold_employee" class="form-select" name="employee">
-            <option value="" disabled selected>Choose Employee</option>
-            <option value="AS123-Ravi">AS123-Ravi</option>
-            <option value="AS432-RajaRajan">AS432-RajaRajan</option>
-            <option value="AS932-Raman">AS932-Raman</option>
-          </select>
-        </div>
-        <div class="col-md-4">
-          <label for="hold_year" class="form-label text-muted">FY Year</label>
-          <input class="form-control" id="hold_year" placeholder="2025" disabled>
-        </div>
-        <div class="col-12 text-end">
-          <button type="submit" class="btn btn-primary">
-            <i class="bi bi-save me-1"></i> Save
-          </button>
-        </div>
-        <div class="col-12 mt-3">
-          <table id="holdEmpTable" class="table table-hover align-middle table-bordered table-striped">
-            <thead class="table-dark">
-              <tr>
-                <th>ID</th>
-                <th>Department</th>
-                <th>Employee</th>
-                <th>Year</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>ECS</td>
-                <td>3290-Saravana</td>
-                <td>2025</td>
-                <td>
-                  <button class="btn btn-sm btn-outline-danger" title="Delete">
-                    <i class="bi bi-trash"></i>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>PCS</td>
-                <td>7840-Priya</td>
-                <td>2025</td>
-                <td>
-                  <button class="btn btn-sm btn-outline-danger" title="Delete">
-                    <i class="bi bi-trash"></i>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>IT</td>
-                <td>AS090-Kamal</td>
-                <td>2024</td>
-                <td>
-                  <button class="btn btn-sm btn-outline-danger" title="Delete" disabled>
-                    <i class="bi bi-trash"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-<!-- Type 6: Incentive cap cealing Amount -->
+
+<!-- Type 5: Incentive cap cealing Amount -->
 <div class="accordion-item">
   <h2 class="accordion-header" id="headingHoldEmp">
     <button class="accordion-button gradient-card collapsed" type="button" 
@@ -971,28 +1245,33 @@
        aria-labelledby="headingHoldEmp" data-bs-parent="#vcsAccordion">
     <div class="card card-body">
       <form class="row g-3 mb-4" name="holdEmpForm">
-        <div class="col-md-4">
+	  <div class="col-md-3">
+                  <label for="dep_ebitda_select" class="form-label">Financial Year</label>
+                  <select id="dep_ebitda_select" class="form-select" name="financial_year">
+                    <option selected disabled>Choose FY</option>
+                    <option value="2024-2025">FY 2024-2025</option>
+                    <option value="2025-2026">FY 2025-2026</option>
+                  </select>
+                </div>
+        <div class="col-md-3">
           <label for="hold_department" class="form-label">Choose Department</label>
           <select id="hold_department" class="form-select" name="department">
             <option value="" disabled selected>Choose Department</option>
-            <option value="it">IT-Tech</option>
-            <option value="hr">IT-Qa</option>
-            <option value="finance">IT-Infra</option>
-			<option value="finance">E-HR</option>
-			<option value="finance">E-Finance</option>
+            <option value="it">Tech</option>
+            <option value="hr">E Fin</option>
+            <option value="finance">E Infra</option>
           </select>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
           <label for="hold_employee" class="form-label">Choose Role</label>
           <select id="hold_employee" class="form-select" name="employee">
             <option value="" disabled selected>Choose Role</option>
             <option value="AS123-Ravi">Manager</option>
-            <option value="AS432-RajaRajan">Team Lead</option>
-            <option value="AS932-Raman">Sr.developer</option>
-			<option value="AS932-Raman">Developer</option>
+            <option value="AS432-RajaRajan">TL</option>
+            <option value="AS932-Raman">Developer</option>
           </select>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
           <label for="hold_year" class="form-label text-muted">Cap score</label>
           <input class="form-control" id="hold_year" placeholder="0">
         </div>
@@ -1006,20 +1285,22 @@
             <thead class="table-dark">
               <tr>
                 <th>ID</th>
+				<th>FY</th>
                 <th>Department</th>
                 <th>Role</th>
                 <th>Score</th>
-				<th>Year</th>
+				<th>Level</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>1</td>
-                <td>IT-Tech</td>
+				<td>FY 25-26</td>
+                <td>Tech</td>
                 <td>Manager</td>
-				<td>3</td>
-                <td>2025</td>
+				<td>9</td>
+                <td>L7,L6,L8</td>
                 <td>
                   <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
                         <i class="bi bi-pencil-square"></i>
@@ -1034,10 +1315,11 @@
               </tr>
               <tr>
                 <td>2</td>
-                <td>IT-Tech</td>
-                <td>Team Lead</td>
-                <td>2</td>
-				<td>2025</td>
+                <td>FY 25-26</td>
+                <td>Tech</td>
+                <td>TL</td>
+				<td>6</td>
+                <td>L5,L4</td>
                 <td>
                   <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
                         <i class="bi bi-pencil-square"></i>
@@ -1052,10 +1334,11 @@
               </tr>
               <tr>
                 <td>3</td>
-                <td>IT-Tech</td>
-                <td>Sr.developer</td>
-                <td>1.5</td>
-				<td>2025</td>
+                <td>FY 25-26</td>
+                <td>Tech</td>
+                <td>Developer</td>
+				<td>4</td>
+                <td>L3,L2</td>
                 <td>
                   <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
                         <i class="bi bi-pencil-square"></i>
@@ -1076,6 +1359,105 @@
   </div>
 </div>
   
+  <!-- Type 6: On-Hold Employees -->
+<div class="accordion-item">
+  <h2 class="accordion-header" id="headingHoldEmp">
+    <button class="accordion-button gradient-card collapsed" type="button" 
+            data-bs-toggle="collapse" data-bs-target="#holdEmployee" 
+            aria-expanded="false" aria-controls="holdEmployee">
+      <span class="slab-tag">HR Maker Checker</span>
+    </button>
+  </h2>
+  <div id="holdEmployee" class="accordion-collapse collapse" 
+       aria-labelledby="headingHoldEmp" data-bs-parent="#vcsAccordion">
+    <div class="card card-body">
+      <form class="row g-3 mb-4" name="holdEmpForm">
+        <div class="col-md-3">
+                  <label for="dep_ebitda_select" class="form-label">Financial Year</label>
+                  <select id="dep_ebitda_select" class="form-select" name="financial_year">
+                    <option selected disabled>Choose FY</option>
+                    <option value="2024-2025">FY 2024-2025</option>
+                    <option value="2025-2026">FY 2025-2026</option>
+                  </select>
+                </div>
+				<div class="col-md-3">
+                  <label for="dep_ebitda_select" class="form-label">Select Maker</label>
+                  <select id="dep_ebitda_select" class="form-select" name="department">
+                    <option selected disabled>Select Maker</option>
+                    <option value="2024-2025">HR 1</option>
+                    <option value="2025-2026">HR 2</option>
+					<option value="2025-2026">HR 3</option>
+					<option value="2025-2026">HR 4</option>
+                  </select>
+                </div>
+				<div class="col-md-3">
+                  <label for="dep_ebitda_select" class="form-label">Select Checker</label>
+                  <select id="dep_ebitda_select" class="form-select" name="department">
+                    <option selected disabled>Select Checker</option>
+                    <option value="2024-2025">HR 1</option>
+                    <option value="2025-2026">HR 2</option>
+					<option value="2025-2026">HR 3</option>
+					<option value="2025-2026">HR 4</option>
+                  </select>
+                </div>
+				<div class="col-12 text-end">
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-save me-1"></i> Save
+          </button>
+        </div>
+        <div class="col-12 mt-3">
+          <table id="excludeDeptTable" class="table table-hover align-middle table-bordered table-striped">
+            <thead class="table-dark">
+              <tr>
+                <th>ID</th>
+                <th>FY</th>
+                <th>Maker</th>
+				<th>Checker</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+				<td>FY 25-26</td>
+				<td>HR 1</td>
+                <td>HR 2</td>
+                <td>
+                      <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
+                        <i class="bi bi-pencil-square"></i>
+                      </button>
+                      <button class="btn btn-sm btn-outline-danger me-1" title="Delete">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                      <button class="btn btn-sm btn-outline-info" title="History">
+                        <i class="bi bi-clock-history"></i>
+                      </button>
+                    </td>
+              </tr>
+              <tr>
+                <td>2</td>
+				<td>FY 25-26</td>
+                <td>HR 3</td>
+                <td>HR 2</td>
+                <td>
+                      <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
+                        <i class="bi bi-pencil-square"></i>
+                      </button>
+                      <button class="btn btn-sm btn-outline-danger me-1" title="Delete">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                      <button class="btn btn-sm btn-outline-info" title="History">
+                        <i class="bi bi-clock-history"></i>
+                      </button>
+                    </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+		</form>
+    </div>
+  </div>
+</div>
  </div>
 </div>
 </div>
@@ -1101,8 +1483,8 @@ const mappingTabsContent = `
       <label for="departmentSelect" class="form-label small text-muted">Select Department</label>
       <select id="departmentSelect" class="form-select form-select-sm" aria-label="Select Department">
         <option selected disabled>Choose Department</option>
-        <option>IT-Tech</option>
-        <option>IT-QC</option>
+        <option>IT SW</option>
+        <option>IT QA</option>
         <option>L-HR</option>
         <option>L-Fin</option>
       </select>
@@ -1113,8 +1495,8 @@ const mappingTabsContent = `
       <label for="roleSelect" class="form-label small text-muted">Select Role</label>
       <select id="roleSelect" class="form-select form-select-sm" aria-label="Select Role">
         <option selected disabled>Choose Role</option>
-        <option value="1">Programmer</option>
-        <option value="2">Sr.Programmer</option>
+        <option value="1">Manager</option>
+        <option value="2">Developer</option>
         <option value="3">Jr.Programmer</option>
       </select>
     </div>
@@ -1164,9 +1546,9 @@ const mappingTabsContent = `
     <tbody>
       <tr>
         <td>1</td>
-        <td>Properly log hours in JIRA</td>
-        <td>IT-Tech</td>
-        <td>Programmer</td>
+        <td>Complete assigned stories/tasks within sprint with ≥ 80% tasks completed on time</td>
+        <td>IT SW</td>
+        <td>Manager</td>
         <td>>14</td>
         <td>Percentage</td>
 		<td>25</td>
@@ -1181,9 +1563,9 @@ const mappingTabsContent = `
       </tr>
 	  <tr>
         <td>2</td>
-        <td>skills upgraded in frequently</td>
-        <td>IT-Tech</td>
-        <td>Programmer</td>
+        <td>Ensure comprehensive test coverage with ≥ 80% tasks completed on time</td>
+        <td>IT QA</td>
+        <td>Manager</td>
         <td>>25</td>
         <td>Percentage</td>
 		<td>25</td>
@@ -1307,7 +1689,7 @@ const mappingTabsContent = `
 		<td><div class="form-check">
         <input class="form-check-input" type="checkbox" id="checkIn1" checked />
       </div></td>
-        <td>Properly log hours in JIRA >14 percentage</td>
+        <td>	Complete assigned stories/tasks within sprint with ≥ 80% tasks completed on time</td>
         <td>
             <input type="text" class="form-control form-control-sm" value="50">
         </td>
@@ -1321,7 +1703,7 @@ const mappingTabsContent = `
 		<td><div class="form-check">
         <input class="form-check-input" type="checkbox" id="checkIn2" checked />
       </div></td>
-        <td>skills upgraded in frequently >25 percentage</td>
+        <td>Ensure comprehensive test coverage with ≥ 80% tasks completed on time</td>
         <td>
             <input type="text" class="form-control form-control-sm" value="50">
         </td>
@@ -1625,14 +2007,14 @@ const datasync = `
         </thead>
         <tbody>
           <tr>
-            <td><small>Properly log hours in JIRA >14 percentage</small></td>
+            <td><small>Complete assigned stories/tasks within sprint with ≥ 80% tasks completed on time</small></td>
             <td><input type="text" class="form-control weight-input" min="0" max="100" value="25" disabled /></td>
             <td><input type="number" class="form-control score-achive-input" min="0" max="14" value="12.00" /></td>
 			<td><input type="text" class="form-control score-input-fail" value="21" disabled /></td>
 			<td><textarea class="form-control" id="reviewerComments" rows="3"></textarea></td>
           </tr>
           <tr>
-            <td><small>skills upgraded in frequently >25 percentage</small></td>
+            <td><small>Ensure comprehensive test coverage with ≥ 80% tasks completed on time</small></td>
             <td><input type="number" class="form-control weight-input" min="0" max="100" value="25" disabled /></td>
             <td><input type="number" class="form-control score-achive-input" min="0" max="25" value="22.00" /></td>
 			<td><input type="text" class="form-control score-input-fail" value="22" disabled /></td>
@@ -1658,7 +2040,7 @@ const datasync = `
             <th colspan="1" class="text-end">Total Weight:</th>
             <th><span id="totalWeight">100.00</span>%</th>
 			<th></th>
-            <th><span id="finalWeightedScore">93.00%</span></th>
+            <th><span id="finalWeightedScore">50.00%</span></th>
           </tr>
         </tfoot>
       </table>
@@ -2098,9 +2480,9 @@ const datasync = `
   <tbody>
     <tr>
 		<td>AS149-John Doe</td>
-		<td>IT</td>
+		<td>IT SW</td>
 		<td>85</td>
-		<td>₹1000.00</td>
+		<td>91000.00</td>
 		<td>
 		<div class="progress border border-success rounded" style="height: 20px;">
           <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" 
@@ -2109,7 +2491,7 @@ const datasync = `
 		 </div>
 		</td>
 	</tr>
-    <tr><td>A789-Jane Smith</td><td>HR</td><td>78</td><td>₹900.00</td>
+    <tr><td>A789-Jane Smith</td><td>IT QA</td><td>78</td><td>9900.00</td>
 		<td>
 		<div class="progress border border-success rounded" style="height: 20px;">
           <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" 
@@ -2118,7 +2500,7 @@ const datasync = `
 		 </div>
 		</td>
 	</tr>
-    <tr><td>9876-Mike Johnson</td><td>Finance</td><td>72</td><td>₹0.00</td>
+    <tr><td>9876-Mike Johnson</td><td>Finance</td><td>72</td><td>90.00</td>
 		<td>
 		<div class="progress border border-inprogress rounded" style="height: 20px;">
           <div class="progress-bar bg-inprogress" role="progressbar" style="width: 40%;" 
@@ -2127,7 +2509,7 @@ const datasync = `
 		 </div>
 		</td>
 	</tr>
-    <tr><td>AS487-Emily Davis</td><td>IT</td><td>85</td><td>₹0.00</td>
+    <tr><td>AS487-Emily Davis</td><td>IT</td><td>85</td><td>90.00</td>
 		<td>
 		<div class="progress border border-inprogress rounded" style="height: 20px;">
           <div class="progress-bar bg-inprogress" role="progressbar" style="width: 25%;" 
@@ -2136,7 +2518,7 @@ const datasync = `
 		 </div>
 		</td>
 	</tr>
-    <tr><td>A907-Chris Lee</td><td>HR</td><td>90</td><td>₹0.00</td>
+    <tr><td>A907-Chris Lee</td><td>HR</td><td>90</td><td>90.00</td>
 		<td>
 		<div class="progress border border-danger rounded" style="height: 20px;">
           <div class="progress-bar bg-danger" role="progressbar" style="width: 0%;" 
@@ -2205,9 +2587,9 @@ const datasync = `
                     <td>2024-2025</td>
                     <td>EMP001 - John Doe</td>
                     <td>95%</td>
-                    <td>₹20,000.00</td>
+                    <td>920,000.00</td>
                     <td>
-                      <input type="text" class="form-control form-control-sm" value="₹22,800.00">
+                      <input type="text" class="form-control form-control-sm" value="922,800.00">
                     </td>
                     <td>
 					  
@@ -2226,9 +2608,9 @@ const datasync = `
                     <td>2024-2025</td>
                     <td>EMP002 - Jane Smith</td>
                     <td>90%</td>
-                    <td>₹24,000.00</td>
+                    <td>924,000.00</td>
                     <td>
-                      <input type="text" class="form-control form-control-sm" value="₹0.00" disabled>
+                      <input type="text" class="form-control form-control-sm" value="90.00" disabled>
                     </td>
                     <td>
                       <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
@@ -2246,9 +2628,9 @@ const datasync = `
                     <td>2024-2025</td>
                     <td>EMP005 - Rani</td>
                     <td>90%</td>
-                    <td>₹14,000.00</td>
+                    <td>914,000.00</td>
                     <td>
-                      <input type="text" class="form-control form-control-sm" value="₹0.00" disabled>
+                      <input type="text" class="form-control form-control-sm" value="90.00" disabled>
                     </td>
                     <td>
                       <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
@@ -2266,9 +2648,9 @@ const datasync = `
                     <td>2024-2025</td>
                     <td>EMP027 - Ravi</td>
                     <td>100%</td>
-                    <td>₹30,000.00</td>
+                    <td>930,000.00</td>
                     <td>
-                      <input type="text" class="form-control form-control-sm" value="₹29,500.00">
+                      <input type="text" class="form-control form-control-sm" value="929,500.00">
                     </td>
                     <td>
                       <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
