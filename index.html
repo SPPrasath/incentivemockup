@@ -27,6 +27,11 @@
 
   <!-- Font Awesome (for icons) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- Include Bootstrap 5 & Flatpickr -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.js"></script>
 
   <style>
     body {
@@ -312,7 +317,11 @@
    </div>
   <script>
    
-   
+    // Initialize Flatpickr for Effective From Date
+  flatpickr("#effective_from", {
+    dateFormat: "Y-m-d",
+    allowInput: true
+  });
    
    const mastersTabsContent = `
       <ul class="nav nav-tabs mb-3" id="mastersTabs" role="tablist">
@@ -524,24 +533,66 @@
           <option value="manager">Manager</option>
         </select>
       </div>
-
-      <!-- Description -->
+	    <!-- Effective From -->
       <div class="col-md-4">
-        <label for="recurring_description" class="form-label">Description</label>
-        <input type="text" class="form-control" id="recurring_description" maxlength="250" placeholder="Enter description">
+        <label class="form-label fw-semibold text-secondary">Effective From</label>
+        <input type="text" id="effective_from" class="form-control" placeholder="Select date">
       </div>
 
-      <!-- Eligible Days -->
-      <div class="col-md-4">
-        <label for="recurring_eligible_days" class="form-label">Eligible Days</label>
-        <input type="number" class="form-control" id="recurring_eligible_days" placeholder="Enter days">
-      </div>
+     
+	  <fieldset class="border rounded-3 p-3 mt-3">
+  <legend class="float-none w-auto px-3 text-primary fw-semibold small">
+    <div class="form-check form-switch d-inline-flex align-items-center gap-2 mb-0">
+      <input type="checkbox" class="form-check-input" id="recurring">
+      <label class="form-check-label" for="recurring">Recurring</label>
+    </div>
+  </legend>
 
-      <!-- Percentage -->
-      <div class="col-md-4">
-        <label for="recurring_percentage" class="form-label">Percentage</label>
-        <input type="number" class="form-control" id="recurring_percentage" placeholder="Enter %">
+  <div class="row">
+    <div class="col-md-4">
+      <label class="small text-muted mb-1">Description</label>
+      <div class="position-relative">
+        <input type="text" id="recurring_description" class="form-control form-control-sm pr-5" maxlength="250" readonly>
+        <small id="recurring_description_counter" class="text-muted position-absolute" style="top: 8px; right: 12px; font-size: 0.65rem; font-weight: bold;">0 / 250</small>
       </div>
+    </div>
+    <div class="col-md-4">
+      <label class="small text-muted mb-1">Eligible Days</label>
+      <input type="text" id="recurring_eligible_days" class="form-control form-control-sm" readonly>
+    </div>
+    <div class="col-md-4">
+      <label class="small text-muted mb-1">Percentage</label>
+      <input type="text" id="recurring_percentage" class="form-control form-control-sm" readonly>
+    </div>
+  </div>
+</fieldset>
+<!-- One Time Section -->
+<fieldset class="border rounded-3 p-3 mt-3">
+  <legend class="float-none w-auto px-3 text-success fw-semibold small">
+    <div class="form-check form-switch d-inline-flex align-items-center gap-2 mb-0">
+      <input type="checkbox" class="form-check-input" id="onetime">
+      <label class="form-check-label" for="onetime">One Time</label>
+    </div>
+  </legend>
+
+  <div class="row">
+    <div class="col-md-4">
+      <label class="small text-muted mb-1">Description</label>
+      <div class="position-relative">
+        <input type="text" id="onetime_description" class="form-control form-control-sm pr-5" maxlength="250" readonly>
+        <small id="onetime_description_counter" class="text-muted position-absolute" style="top: 8px; right: 12px; font-size: 0.65rem; font-weight: bold;">0 / 250</small>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <label class="small text-muted mb-1">Eligible Days</label>
+      <input type="text" id="onetime_eligible_days" class="form-control form-control-sm" readonly>
+    </div>
+    <div class="col-md-4">
+      <label class="small text-muted mb-1">Percentage</label>
+      <input type="text" id="onetime_percentage" class="form-control form-control-sm" readonly>
+    </div>
+  </div>
+</fieldset>
 
       <!-- Save Button -->
       <div class="col-12 text-end">
@@ -549,6 +600,105 @@
           <i class="bi bi-save"></i> Save
         </button>
       </div>
+	  
+<!-- Incentive Grid -->
+<div id="incentive-area" class="bg-white shadow-sm rounded-3 p-3 mt-4">
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>#</th>
+              <th>Role</th>
+          <th>Effective From</th>
+          <th>Effective To</th>
+          <th>One Time</th>
+          <th>One Time Description</th>
+          <th>One Time Eligible Days</th>
+          <th>One Time Percentage</th>
+		     <th>Recurring</th>
+          <th>Recurring Description</th>
+          <th>Recurring Eligible Days</th>
+          <th>Recurring Percentage</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>      
+          <td>Manager</td>
+          <td>2025-01-01</td>
+          <td>2025-12-31</td>
+          <td>Yes</td>
+          <td>Annual Bonus</td>
+          <td>30</td>
+          <td>10%</td>
+		   <td>Yes</td>
+		  <td>good Performance</td>
+          <td>30</td>
+          <td>10%</td>
+          <td><span class="badge bg-success">Active</span></td>
+          <td class="text-center">
+          <div class="btn-group btn-group-sm" role="group">
+              <button class="btn btn-outline-primary" title="Edit"><i class="bi bi-pencil"></i></button>
+              <button class="btn btn-outline-danger" title="Delete"><i class="bi bi-trash"></i></button>
+              <button class="btn btn-outline-secondary" title="History"><i class="bi bi-clock-history"></i></button>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>2</td>
+        
+          <td>BD</td>
+          <td>2025-02-01</td>
+          <td>2025-06-30</td>
+          <td>No</td>
+          <td>Campaign Bonus</td>
+          <td>15</td>
+          <td>7%</td>
+		  <td>Yes</td>
+		  <td>Task Complete</td>
+          <td>30</td>
+          <td>10%</td>
+          <td><span class="badge bg-warning text-dark">Inactive</span></td>
+          <td class="text-center">
+            <div class="btn-group btn-group-sm" role="group">
+              <button class="btn btn-outline-primary" title="Edit"><i class="bi bi-pencil"></i></button>
+              <button class="btn btn-outline-danger" title="Delete"><i class="bi bi-trash"></i></button>
+              <button class="btn btn-outline-secondary" title="History"><i class="bi bi-clock-history"></i></button>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>3</td>
+      
+          <td>CSE</td>
+          <td>2025-03-01</td>
+          <td>2025-09-30</td>
+          <td>Yes</td>
+          <td>Quarterly Target</td>
+          <td>20</td>
+          <td>5%</td>
+		  <td>Yes</td>
+		  <td>quick resolved</td>
+          <td>20</td>
+          <td>40%</td>
+		  <td><span class="badge bg-warning text-dark">Inactive</span></td>
+          <td class="text-center">
+            <div class="btn-group btn-group-sm" role="group">
+              <button class="btn btn-outline-primary" title="Edit"><i class="bi bi-pencil"></i></button>
+              <button class="btn btn-outline-danger" title="Delete"><i class="bi bi-trash"></i></button>
+              <button class="btn btn-outline-secondary" title="History"><i class="bi bi-clock-history"></i></button>
+            </div>
+          </td>
+        </tr>
+
+             </tbody>
+    </table>
+  </div>
+</div>
 
     </form>
   </div>
@@ -564,55 +714,163 @@
           </button>
         </h2>
         <div id="processevaluatesetting" class="accordion-collapse collapse" data-bs-parent="#vcsAccordion1">
-          <div class="card card-body">
-             <form class="row g-3 mb-4">
-      
-      <!-- Performance Dropdown -->
-      <div class="col-md-4">
-        <label class="form-label">Performance Duration</label>
-        <select class="form-select">
-          <option selected disabled>Choose Duration</option>
-          <option value="bd">2 Months</option>
-          <option value="tl">4 Months</option>
-          <option value="cse">6 Months</option>
-          <option value="manager">12 Months</option>
-        </select>
-      </div>
-		<!-- Processing Intravel Dropdown -->
-      <div class="col-md-4">
-        <label class="form-label">Processing Intravel</label>
-        <select class="form-select">
-          <option selected disabled>Choose Intravel</option>
-          <option value="bd">1 Months</option>
-          <option value="tl">2 Months</option>
-          <option value="cse">3 Months</option>
-          <option value="manager">4 Months</option>
-        </select>
-      </div>
-	  
-	  <!-- Processing Dropdown -->
-      <div class="col-md-4">
-        <label class="form-label">Processing Duration</label>
-        <select class="form-select">
-          <option selected disabled>Choose Duration</option>
-		  <option value="bd">2 Months</option>
-          <option value="tl">3 Months</option>
-          <option value="cse">6 Months</option>
-          <option value="manager">12 Months</option>
-          
-        </select>
-      </div>
-       
+        <div class="card card-body shadow-sm rounded-3 mt-3">
+  <form class="row g-3 mb-4">
 
-      <!-- Save Button -->
-      <div class="col-12 text-end">
-        <button type="submit" class="btn btn-primary">
-          <i class="bi bi-save"></i> Save
-        </button>
+    <!-- Radio Buttons Row -->
+    <div class="col-12">
+      <label class="form-label fw-semibold text-primary d-block mb-1">Select Type</label>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="type" id="cumulativeBilling" value="cumulative">
+        <label class="form-check-label" for="cumulativeBilling">Cumulative Billing</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="type" id="yearlySalesAchieve" value="yearly">
+        <label class="form-check-label" for="yearlySalesAchieve">Yearly Sales Achieve</label>
+      </div>
+    </div>
+	  <!-- Role Dropdown -->
+      <div class="col-md-3">
+        <label class="form-label">Select Role</label>
+        <select class="form-select">
+          <option selected disabled>Choose Role</option>
+          <option value="bd">BD</option>
+          <option value="tl">TL</option>
+          <option value="cse">CSE</option>
+          <option value="manager">Manager</option>
+        </select>
       </div>
 
-    </form>
-          </div>
+    <!-- Performance Duration -->
+    <div class="col-md-3">
+      <label class="form-label">Performance Duration</label>
+      <select class="form-select">
+        <option selected disabled>Choose Duration</option>
+        <option>2 Months</option>
+        <option>4 Months</option>
+        <option>6 Months</option>
+        <option>12 Months</option>
+      </select>
+    </div>
+
+
+    <!-- Processing Intravel -->
+    <div class="col-md-3">
+      <label class="form-label">Processing Intravel</label>
+      <select class="form-select">
+        <option selected disabled>Choose Intravel</option>
+        <option>1 Month</option>
+        <option>2 Months</option>
+        <option>3 Months</option>
+        <option>4 Months</option>
+      </select>
+    </div>
+
+    <!-- Processing Duration -->
+    <div class="col-md-3">
+      <label class="form-label">Processing Duration</label>
+      <select class="form-select">
+        <option selected disabled>Choose Duration</option>
+        <option>2 Months</option>
+        <option>3 Months</option>
+        <option>6 Months</option>
+        <option>12 Months</option>
+      </select>
+    </div>
+
+    <!-- Save Button -->
+    <div class="col-12 text-end">
+      <button type="submit" class="btn btn-primary">
+        <i class="bi bi-save"></i> Save
+      </button>
+    </div>
+
+    <!-- Payout Master Grid -->
+  <div id="incentive-area-pt" class="bg-white shadow-sm rounded-3 p-3 mt-4">
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>#</th> 
+          <th>Role</th>
+          <th>Performance Period</th>
+          <th>Processing Evaluation Period</th>
+          <th>Payment Period</th>
+          <th>Status</th>
+          <th class="text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>         
+           <td>Tester</td>
+          <td>Jan 2026 – Dec 2026</td>
+          <td>Jan 2026 – Feb 2026</td>
+          <td>Mar 2026</td>
+          <td><span class="badge bg-success">Active</span></td>
+          <td class="text-center">
+            <div class="btn-group btn-group-sm" role="group">
+              <button class="btn btn-outline-primary" title="Edit"><i class="bi bi-pencil"></i></button>
+              <button class="btn btn-outline-danger" title="Delete"><i class="bi bi-trash"></i></button>
+              <button class="btn btn-outline-secondary" title="History"><i class="bi bi-clock-history"></i></button>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>2</td>         
+          <td>BDE</td>
+          <td>Jan 2026 – Jun 2026</td>
+          <td>Jul 2026 – Aug 2026</td>
+          <td>Sep 2026</td>
+          <td><span class="badge bg-warning text-dark">Inactive</span></td>
+          <td class="text-center">
+            <div class="btn-group btn-group-sm" role="group">
+              <button class="btn btn-outline-primary" title="Edit"><i class="bi bi-pencil"></i></button>
+              <button class="btn btn-outline-danger" title="Delete"><i class="bi bi-trash"></i></button>
+              <button class="btn btn-outline-secondary" title="History"><i class="bi bi-clock-history"></i></button>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+        <td>3</td>         
+          <td>Content Strategist</td>
+          <td>Jul 2026 – Dec 2026</td>
+          <td>Jan 2027 – Feb 2027</td>
+          <td>Mar 2027</td>
+          <td><span class="badge bg-warning text-dark">Inactive</span></td>
+          <td class="text-center">
+            <div class="btn-group btn-group-sm" role="group">
+              <button class="btn btn-outline-primary" title="Edit"><i class="bi bi-pencil"></i></button>
+              <button class="btn btn-outline-danger" title="Delete"><i class="bi bi-trash"></i></button>
+              <button class="btn btn-outline-secondary" title="History"><i class="bi bi-clock-history"></i></button>
+            </div>
+          </td>
+        </tr>
+		<tr>
+        <td>4</td>         
+          <td>Research Analyst</td>
+          <td>Jul 2026 – Dec 2026</td>
+          <td>Jan 2027 – Feb 2027</td>
+          <td>Mar 2027</td>
+          <td><span class="badge bg-success">Active</span></td>
+          <td class="text-center">
+            <div class="btn-group btn-group-sm" role="group">
+              <button class="btn btn-outline-primary" title="Edit"><i class="bi bi-pencil"></i></button>
+              <button class="btn btn-outline-danger" title="Delete"><i class="bi bi-trash"></i></button>
+              <button class="btn btn-outline-secondary" title="History"><i class="bi bi-clock-history"></i></button>
+            </div>
+          </td>
+        </tr>
+		
+      </tbody>
+    </table>
+  </div>
+</div>
+
+  </form>
+</div>
         </div>
       </div>
     </div>
@@ -1467,10 +1725,10 @@
 const mappingTabsContent = `
 <ul class="nav nav-tabs mb-3" id="mappingTabs" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="kra-allocation-tab" data-bs-toggle="tab" data-bs-target="#kra-allocation" type="button">KRA Allocation</button>
+    <button class="nav-link active" id="kra-allocation-tab" data-bs-toggle="tab" data-bs-target="#kra-allocation" type="button">Assign KRA</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="kra-mapping-tab" data-bs-toggle="tab" data-bs-target="#kra-mapping" type="button">KRA Mapping</button>
+    <button class="nav-link" id="kra-mapping-tab" data-bs-toggle="tab" data-bs-target="#kra-mapping" type="button">Assign KRA Employee</button>
   </li>
  
 </ul>
@@ -1478,37 +1736,42 @@ const mappingTabsContent = `
 <div class="tab-pane fade show active" id="kra-allocation" role="tabpanel" aria-labelledby="kra-allocation-tab" tabindex="0">
   <form class="row g-3 mb-4 align-items-end">
     
-    <!-- Select Department -->
-    <div class="col-md-6">
-      <label for="departmentSelect" class="form-label small text-muted">Select Department</label>
-      <select id="departmentSelect" class="form-select form-select-sm" aria-label="Select Department">
-        <option selected disabled>Choose Department</option>
-        <option>IT SW</option>
-        <option>IT QA</option>
-        <option>L-HR</option>
-        <option>L-Fin</option>
-      </select>
-    </div>
-    
-    <!-- Select Role -->
-    <div class="col-md-6">
-      <label for="roleSelect" class="form-label small text-muted">Select Role</label>
-      <select id="roleSelect" class="form-select form-select-sm" aria-label="Select Role">
-        <option selected disabled>Choose Role</option>
-        <option value="1">Manager</option>
-        <option value="2">Developer</option>
-        <option value="3">Jr.Programmer</option>
-      </select>
-    </div>
+   <div class="col-md-3">
+                  <label for="dep_ebitda_select" class="form-label">Financial Year</label>
+                  <select id="dep_ebitda_select" class="form-select" name="financial_year">
+                    <option selected disabled>Choose FY</option>
+                    <option value="2024-2025">FY 2024-2025</option>
+                    <option value="2025-2026">FY 2025-2026</option>
+                  </select>
+                </div>
+        <div class="col-md-3">
+          <label for="hold_department" class="form-label">Choose Department</label>
+          <select id="hold_department" class="form-select" name="department">
+            <option value="" disabled selected>Choose Department</option>
+            <option value="it">Tech</option>
+            <option value="hr">E Fin</option>
+            <option value="finance">E Infra</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label for="hold_employee" class="form-label">Choose Role</label>
+          <select id="hold_employee" class="form-select" name="employee">
+            <option value="" disabled selected>Choose Role</option>
+            <option value="AS123-Ravi">Manager</option>
+            <option value="AS432-RajaRajan">TL</option>
+            <option value="AS932-Raman">Developer</option>
+          </select>
+        </div>
     
     <!-- KRA Description -->
    <div class="col-md-12">
-      <label for="DescriptionSelect" class="form-label small text-muted"> Description and Target/Weightage</label>
+      <label for="DescriptionSelect" class="form-label small text-muted">KRA Description</label>
       <select id="DescriptionSelect" class="form-select form-select-sm" aria-label="Select Description">
-        <option selected disabled>Choose KRA Description</option>
-        <option value="1">KRA for Tech team</option>   
-		<option value="2">Daily commit the source code in GIT</option>   
+        <option selected disabled>Choose KRA</option>
+        <option value="1">Complete assigned stories within sprint with ≥ 80% tasks completed on time</option>   
+		<option value="2">Ensure comprehensive test coverage with ≥ 80% tasks completed on time</option>   
 		<option value="3">Maintain the codeing standard</option>   		
+		<option value="3">Update the source code in GIT frequently</option>   		
       </select>
     </div>
     
@@ -1516,7 +1779,7 @@ const mappingTabsContent = `
     <div class="col-md-6 d-flex align-items-end gap-2">
       <input type="text" id="targetWeightage" class="form-control form-control-sm" placeholder="Enter Target here" aria-describedby="targetError" />
       <select id="targetWeightageUnit" class="form-select form-select-sm" aria-label="Select Unit" style="max-width: 120px;">
-        <option value="Percentage">Percentage</option>
+        <option value="Percentage">%</option>
         <option value="Days">Days</option>
       </select>
 	  <input type="text" id="Weightage" class="form-control form-control-sm" placeholder="Enter Weightage here" aria-describedby="weightageError" />
@@ -1534,9 +1797,10 @@ const mappingTabsContent = `
     <thead class="table-dark">
       <tr>
         <th>ID</th>
-        <th>KRA Title</th>
+		<th>FY</th>
         <th>Department</th>
         <th>Role</th>
+		<th>KRA Description</th>
         <th>Target</th>
         <th>Unit</th>
         <th>Weightage</th>
@@ -1546,11 +1810,12 @@ const mappingTabsContent = `
     <tbody>
       <tr>
         <td>1</td>
-        <td>Complete assigned stories/tasks within sprint with ≥ 80% tasks completed on time</td>
-        <td>IT SW</td>
-        <td>Manager</td>
-        <td>>14</td>
-        <td>Percentage</td>
+		<td>FY 25-26</td>
+        <td>Tech</td>
+        <td>TL</td>
+		<td>Complete assigned stories within sprint with ≥ 80% tasks completed on time</td>
+        <td>>80</td>
+        <td>%</td>
 		<td>25</td>
         <td>
           <button class="btn btn-sm btn-outline-primary me-1" title="Edit"><i class="bi bi-pencil-square"></i></button>
@@ -1563,11 +1828,12 @@ const mappingTabsContent = `
       </tr>
 	  <tr>
         <td>2</td>
-        <td>Ensure comprehensive test coverage with ≥ 80% tasks completed on time</td>
-        <td>IT QA</td>
-        <td>Manager</td>
-        <td>>25</td>
-        <td>Percentage</td>
+		<td>FY 25-26</td>
+        <td>Tech</td>
+        <td>TL</td>
+		<td>Ensure comprehensive test coverage with ≥ 80% tasks completed on time</td>
+        <td>>80</td>
+        <td>%</td>
 		<td>25</td>
         <td>
           <button class="btn btn-sm btn-outline-primary me-1" title="Edit"><i class="bi bi-pencil-square"></i></button>
@@ -1580,12 +1846,13 @@ const mappingTabsContent = `
       </tr>
 	  <tr>
         <td>3</td>
-        <td>Maintain the codeing standard</td>
-        <td>IT-Tech</td>
-        <td>Programmer</td>
-        <td>>40</td>
-        <td>Percentage</td>
-		<td>50</td>
+		<td>FY 25-26</td>
+        <td>Tech</td>
+        <td>TL</td>
+		<td>Maintain the codeing standard</td>
+        <td>>70</td>
+        <td>%</td>
+		<td>25</td>
         <td>
           <button class="btn btn-sm btn-outline-primary me-1" title="Edit"><i class="bi bi-pencil-square"></i></button>
           <button class="btn btn-sm btn-outline-danger me-1" title="Delete"><i class="bi bi-trash"></i></button>
@@ -1597,29 +1864,13 @@ const mappingTabsContent = `
       </tr>
       <tr>
         <td>4</td>
-        <td>skills upgraded in frequently</td>
-        <td>IT-Tech</td>
-        <td>Sr.Programmer</td>
-        <td>>30</td>
-        <td>Percentage</td>
-		<td>50</td>
-        <td>
-          <button class="btn btn-sm btn-outline-primary me-1" title="Edit"><i class="bi bi-pencil-square"></i></button>
-          <button class="btn btn-sm btn-outline-danger me-1" title="Delete"><i class="bi bi-trash"></i></button>
-		        <button class="btn btn-sm btn-outline-info" title="History">
-        <i class="bi bi-clock-history"></i>
-      </button>
-
-        </td>
-      </tr>
-	  <tr>
-        <td>5</td>
-        <td>Maintain the codeing standard</td>
-        <td>IT-Tech</td>
-        <td>Sr.Programmer</td>
-        <td>>20</td>
-        <td>Percentage</td>
-		<td>50</td>
+		<td>FY 25-26</td>
+        <td>Tech</td>
+        <td>TL</td>
+		<td>Update the source code in GIT frequently</td>
+        <td>>90</td>
+        <td>%</td>
+		<td>25</td>
         <td>
           <button class="btn btn-sm btn-outline-primary me-1" title="Edit"><i class="bi bi-pencil-square"></i></button>
           <button class="btn btn-sm btn-outline-danger me-1" title="Delete"><i class="bi bi-trash"></i></button>
@@ -1635,124 +1886,133 @@ const mappingTabsContent = `
 
   <div class="tab-pane fade" id="kra-mapping" role="tabpanel" aria-labelledby="kra-mapping-tab" tabindex="0">
     <form class="row g-3 mb-4 align-items-end">
-    <!-- Select Department -->
-    <div class="col-md-4">
-      <label for="departmentSelect" class="form-label small text-muted">Select Department</label>
-      <select id="departmentSelect" class="form-select form-select-sm" aria-label="Select Department">
-        <option selected disabled>Choose Department</option>
-        <option>Sales</option>
-        <option>Marketing</option>
-        <option>HR</option>
-        <option>Finance</option>
+    
+   <div class="col-md-3">
+                  <label for="dep_ebitda_select" class="form-label">Financial Year</label>
+                  <select id="dep_ebitda_select" class="form-select" name="financial_year">
+                    <option selected disabled>Choose FY</option>
+                    <option value="2024-2025">FY 2024-2025</option>
+                    <option value="2025-2026">FY 2025-2026</option>
+                  </select>
+                </div>
+        <div class="col-md-3">
+          <label for="hold_department" class="form-label">Choose Department</label>
+          <select id="hold_department" class="form-select" name="department">
+            <option value="" disabled selected>Choose Department</option>
+            <option value="it">Tech</option>
+            <option value="hr">E Fin</option>
+            <option value="finance">E Infra</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label for="hold_employee" class="form-label">Choose Role</label>
+          <select id="hold_employee" class="form-select" name="employee">
+            <option value="" disabled selected>Choose Role</option>
+            <option value="AS123-Ravi">Manager</option>
+            <option value="AS432-RajaRajan">TL</option>
+            <option value="AS932-Raman">Developer</option>
+          </select>
+        </div>
+		<div class="col-md-3">
+          <label for="hold_employee" class="form-label">Choose Employee</label>
+          <select id="hold_employee" class="form-select" name="employee">
+            <option value="" disabled selected>Choose Employee</option>
+            <option value="AS123-Ravi">AS123-Ravi</option>
+            <option value="AS432-RajaRajan">AS432-RajaRajan</option>
+            <option value="AS932-Raman">AS768-Kamal</option>
+			<option value="AS932-Raman">AS932-Raman</option>
+          </select>
+        </div>
+    
+    <!-- KRA Description -->
+   <div class="col-md-12">
+      <label for="DescriptionSelect" class="form-label small text-muted">KRA Description</label>
+      <select id="DescriptionSelect" class="form-select form-select-sm" aria-label="Select Description">
+        <option selected disabled>Choose KRA</option>
+        <option value="1">Complete assigned stories within sprint with ≥ 80% tasks completed on time</option>   
+		<option value="2">Ensure comprehensive test coverage with ≥ 80% tasks completed on time</option>   
+		<option value="3">Maintain the codeing standard</option>   		
+		<option value="3">Update the source code in GIT frequently</option>   		
       </select>
     </div>
     
-    <!-- Select Role -->
-    <div class="col-md-4">
-      <label for="roleSelect" class="form-label small text-muted">Select Role</label>
-      <select id="roleSelect" class="form-select form-select-sm" aria-label="Select Role">
-        <option selected disabled>Choose Role</option>
-        <option value="1">Manager</option>
-        <option value="2">Senior</option>
-        <option value="3">Junior</option>
+    <!-- Target/Weightage and Unit dropdown inline -->
+    <div class="col-md-6 d-flex align-items-end gap-2">
+      <input type="text" id="targetWeightage" class="form-control form-control-sm" placeholder="Enter Target here" aria-describedby="targetError" />
+      <select id="targetWeightageUnit" class="form-select form-select-sm" aria-label="Select Unit" style="max-width: 120px;">
+        <option value="Percentage">%</option>
+        <option value="Days">Days</option>
       </select>
+	  <input type="text" id="Weightage" class="form-control form-control-sm" placeholder="Enter Weightage here" aria-describedby="weightageError" />
     </div>
     
-    <!-- Employee -->
-   <div class="col-md-4">
-      <label for="Employee" class="form-label small text-muted"> Employee</label>
-      <select id="employees" class="form-select form-select-sm" aria-label="Select Employee">
-        <option selected disabled>Choose Employee</option>
-        <option value="1">AS149-Mani</option>       
-		<option value="2">AS908-Mala</option>       
-		<option value="3">AS875-Bala</option>       
-		<option value="4">AS343-Arun</option>  		
-      </select>
-    </div>    
+    <!-- Save button aligned bottom right -->
+    <div class="col-md-6 d-flex justify-content-end align-items-end">
+      <button type="submit" class="btn btn-primary btn-sm px-4">Add KRA</button>
+    </div>
     
+  </form>
 
   <!-- Sample Data Grid Table -->
   <table id="kraTable" class="table table-hover align-middle table-bordered table-striped">
     <thead class="table-dark">
       <tr>
         <th>ID</th>
-		<th> select</th>
-        <th>KRA Title</th>        
+		<th>FY</th>
+        <th>Department</th>
+        <th>Role</th>
+		<th>Employee</th>
+		<th>KRA Description</th>
+        <th>Target</th>
+        <th>Unit</th>
         <th>Weightage</th>
-        <th>Combine</th>
-        
+		<th>Action</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>1</td>
-		<td><div class="form-check">
-        <input class="form-check-input" type="checkbox" id="checkIn1" checked />
-      </div></td>
-        <td>	Complete assigned stories/tasks within sprint with ≥ 80% tasks completed on time</td>
+		<td>FY 25-26</td>
+        <td>Tech</td>
+        <td>TL</td>
+		<td>AS123-Ravi</td>
+		<td>Complete assigned stories within sprint with ≥ 80% tasks completed on time</td>
+        <td>>80</td>
+        <td>%</td>
+		<td>50</td>
         <td>
-            <input type="text" class="form-control form-control-sm" value="50">
+          <button class="btn btn-sm btn-outline-primary me-1" title="Edit"><i class="bi bi-pencil-square"></i></button>
+          <button class="btn btn-sm btn-outline-danger me-1" title="Delete"><i class="bi bi-trash"></i></button>
+		        <button class="btn btn-sm btn-outline-info" title="History">
+        <i class="bi bi-clock-history"></i>
+      </button>
+
         </td>
-        <td><div class="form-check">
-        <input class="form-check-input" type="checkbox" id="check1" />
-      </div></td>
-       
-      </tr>
-      <tr>
-        <td>2</td>
-		<td><div class="form-check">
-        <input class="form-check-input" type="checkbox" id="checkIn2" checked />
-      </div></td>
-        <td>Ensure comprehensive test coverage with ≥ 80% tasks completed on time</td>
-        <td>
-            <input type="text" class="form-control form-control-sm" value="50">
-        </td>
-        <td><div class="form-check">
-        <input class="form-check-input" type="checkbox" id="check2" />
-      </div></td>
-       
       </tr>
 	  <tr>
-        <td>3</td>
-		<td><div class="form-check">
-        <input class="form-check-input" type="checkbox" id="checkIn3" checked />
-      </div></td>
-        <td>Maintain the codeing standard >40 percentage</td>
+        <td>2</td>
+		<td>FY 25-26</td>
+        <td>Tech</td>
+        <td>TL</td>
+		<td>AS123-Ravi</td>
+		<td>Ensure comprehensive test coverage with ≥ 80% tasks completed on time</td>
+        <td>>80</td>
+        <td>%</td>
+		<td>50</td>
         <td>
-            <input type="text" class="form-control form-control-sm" value="50">
+          <button class="btn btn-sm btn-outline-primary me-1" title="Edit"><i class="bi bi-pencil-square"></i></button>
+          <button class="btn btn-sm btn-outline-danger me-1" title="Delete"><i class="bi bi-trash"></i></button>
+		        <button class="btn btn-sm btn-outline-info" title="History">
+        <i class="bi bi-clock-history"></i>
+      </button>
+
         </td>
-        <td><div class="form-check">
-        <input class="form-check-input" type="checkbox" id="check1" />
-      </div></td>
-       
       </tr>
-      <tr>
-        <td>4</td>
-		<td><div class="form-check">
-        <input class="form-check-input" type="checkbox" id="checkIn3" checked/>
-      </div></td>
-        <td>Complainces Source</td>
-        <td>
-            <input type="text" class="form-control form-control-sm" value="50">
-        </td>
-        <td><div class="form-check">
-        <input class="form-check-input" type="checkbox" id="check2" />
-      </div></td>
-       
-      </tr>
+	  
     </tbody>
   </table>
   
-    <!-- Save button aligned bottom right -->
-    <div class="col-md-12 d-flex justify-content-end align-items-end">
-      <button type="submit" class="btn btn-primary">
-                <i class="bi bi-save me-1"></i> Save
-              </button>
-    </div>
-    
-  </form>
-  
-  </div>
+	</div>
 </div> 
 
 `;
@@ -1922,7 +2182,7 @@ const datasync = `
       <div class="col-md-3">
 		  <div class="card employee-tile p-3 border rounded shadow-sm disabled-div" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="top" title="Name: AS149-Ravi| Role: IT Programmer| KRA: 3" >
 			<div class="employee-name mb-1">AS149-Ravi</div>
-			<div class="employee-role mb-1">IT Programmer</div>
+			<div class="employee-role mb-1">Team Lead</div>
 			<!-- <div class="employee-dept">Assigned KRA: <span class="badge bg-primary">3</span> -->
 			<div class="progress border border-success rounded" style="height:0px;">
 				<div class="progress-bar bg-success" role="progressbar" style="width: 100%;" 
@@ -1935,8 +2195,8 @@ const datasync = `
       <div class="col-md-3">
         <div class="card employee-tile p-3 border rounded shadow-sm" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="top" 
 			   title="Name: AS232-Raman| Role: IT Sr.Programmer| KRA: 4">
-			<div class="employee-name mb-1">AS232-Raman</div>
-			<div class="employee-role mb-1">IT Sr.Programmer</div>
+			<div class="employee-name mb-1">AS432-RajaRajan</div>
+			<div class="employee-role mb-1">Sr.Team Lead</div>
 			<!-- <div class="employee-dept">Assigned KRA: <span class="badge bg-primary">3</span> -->
 			<div class="progress border border-success rounded" style="height:0px;">
 				<div class="progress-bar bg-success" role="progressbar" style="width: 100%;" 
@@ -1951,7 +2211,7 @@ const datasync = `
         <div class="card employee-tile p-3 border rounded shadow-sm" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="top" 
 			   title="Name:AS768-Kamal| Role: IT Programmer Analyst| KRA: 2">
 			<div class="employee-name mb-1">AS768-Kamal</div>
-			<div class="employee-role mb-1">IT Programmer Analyst</div>
+			<div class="employee-role mb-1">Jr.Team Lead</div>
 			<!-- <div class="employee-dept">Assigned KRA: <span class="badge bg-primary">3</span> -->
 			<div class="progress border border-inprogress  rounded" style="height:0px;">
 				<div class="progress-bar bg-inprogress " role="progressbar" style="width: 72%" 
@@ -1965,8 +2225,8 @@ const datasync = `
       <div class="col-md-3">
         <div class="card employee-tile p-3 border rounded shadow-sm" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="top" 
 			   title="Name:AS980-Kavya| Role: IT Programmer Analyst| KRA: 3">
-			<div class="employee-name mb-1">AS980-Kavya</div>
-			<div class="employee-role mb-1">IT Programmer</div>
+			<div class="employee-name mb-1">AS932-Raman</div>
+			<div class="employee-role mb-1">Team Lead</div>
 			<!-- <div class="employee-dept">Assigned KRA: <span class="badge bg-primary">3</span> -->
 			<div class="progress border border-danger " style="height:0px;">
 				<div class="progress-bar bg-danger" role="progressbar" style="width:0%" 
@@ -1987,7 +2247,7 @@ const datasync = `
         
         <div class="col-md-3">
           <label for="employeeName" class="form-label">Employee Name</label>
-          <input type="text" class="form-control" id="employeeName" placeholder="AS149-Ravi" disabled />
+          <input type="text" class="form-control" id="employeeName" placeholder="AS768-Kamal" disabled />
         </div>
 		<div class="col-md-3">
           <label for="reviewer" class="form-label">Reviewer</label>
@@ -1999,40 +2259,45 @@ const datasync = `
         <thead class="table-dark">
           <tr>
             <th>KRA</th>
-            <th>Weightage</th>
-            <th data-bs-toggle="tooltip" title="System not allow grater than target">Score</th>
-			<th data-bs-toggle="tooltip" title="(Achive/Target) * Weightage">Achived</th>
+            <th>KRA Weightage</th>
+            <th data-bs-toggle="tooltip" title="">KRA Target</th>
+			<th data-bs-toggle="tooltip" title="">Achived</th>
+			<th data-bs-toggle="tooltip" title="(Achive/Target) * Weightage">Score</th>
 			 <th>Comment</th>
 		  </tr>
         </thead>
         <tbody>
           <tr>
-            <td><small>Complete assigned stories/tasks within sprint with ≥ 80% tasks completed on time</small></td>
+            <td><small>Complete assigned stories within sprint with ≥ 80% tasks completed on time</small></td>
             <td><input type="text" class="form-control weight-input" min="0" max="100" value="25" disabled /></td>
-            <td><input type="number" class="form-control score-achive-input" min="0" max="14" value="12.00" /></td>
-			<td><input type="text" class="form-control score-input-fail" value="21" disabled /></td>
-			<td><textarea class="form-control" id="reviewerComments" rows="3"></textarea></td>
+			<td><input type="text" class="form-control weight-input" min="0" max="100" value="≥ 80%" disabled /></td>
+			<td><input type="text" class="form-control score-input-success" value="80"/></td>
+			<td><input type="text" class="form-control score-input-success" value="25" disabled /></td>
+			<td><textarea class="form-control" id="reviewerComments" rows="2"></textarea></td>
           </tr>
           <tr>
             <td><small>Ensure comprehensive test coverage with ≥ 80% tasks completed on time</small></td>
             <td><input type="number" class="form-control weight-input" min="0" max="100" value="25" disabled /></td>
-            <td><input type="number" class="form-control score-achive-input" min="0" max="25" value="22.00" /></td>
-			<td><input type="text" class="form-control score-input-fail" value="22" disabled /></td>
-			<td><textarea class="form-control" id="reviewerComments" rows="3"></textarea></td>
+            <td><input type="text" class="form-control weight-input" min="0" max="100" value="≥ 80%" disabled /></td>
+			<td><input type="text" class="form-control score-input-success" value="90"/></td>
+			<td><input type="text" class="form-control score-input-success" value="25" disabled /></td>
+			<td><textarea class="form-control" id="reviewerComments" rows="2"></textarea></td>
           </tr>
           <tr>
-            <td><small>Maintain the codeing standard >40 percentage</small></td>
+            <td><small>Maintain the codeing standard</small></td>
             <td><input type="number" class="form-control weight-input" min="0" max="100" value="25" disabled /></td>
-            <td><input type="number" class="form-control score-achive-input" min="0" max="100" value="45.00" /></td>
-			<td><input type="text" class="form-control score-input-success" value="25" disabled /></td>
-			<td><textarea class="form-control" id="reviewerComments" rows="3"></textarea></td>
+            <td><input type="text" class="form-control weight-input" min="0" max="100" value="≥ 70%" disabled /></td>
+			<td><input type="text" class="form-control score-input-fail" value="65"/></td>
+			<td><input type="text" class="form-control score-input-fail" value="22" disabled /></td>
+			<td><small><textarea class="form-control" id="reviewerComments" rows="2">Need improve in codeing standard</textarea></small></td>
           </tr>
           <tr>
-            <td><small>Update the source code in GIT frequently> 60 percentage</small></td>
+            <td><small>Update the source code in GIT frequently</small></td>
              <td><input type="number" class="form-control weight-input" min="0" max="100" value="25" disabled /></td>
-            <td><input type="number" class="form-control score-achive-input" min="0" max="100" value="65.00" /></td>
-			<td><input type="text" class="form-control score-input-success" value="25" disabled /></td>
-			<td><textarea class="form-control" id="reviewerComments" rows="3"></textarea></td>
+            <td><input type="text" class="form-control weight-input" min="0" max="100" value="≥ 90%" disabled /></td>
+			<td><input type="text" class="form-control score-input-success" value="90"/></td>
+			<td><input type="text" class="form-control score-input-success" value="25"  disabled /></td>
+			<td><textarea class="form-control" id="reviewerComments" rows="2"></textarea></td>
           </tr>
         </tbody>
         <tfoot>
@@ -2040,7 +2305,8 @@ const datasync = `
             <th colspan="1" class="text-end">Total Weight:</th>
             <th><span id="totalWeight">100.00</span>%</th>
 			<th></th>
-            <th><span id="finalWeightedScore">50.00%</span></th>
+			<th></th>
+            <th><span id="finalWeightedScore">75.00%</span></th>
           </tr>
         </tfoot>
       </table>
@@ -2060,6 +2326,242 @@ const datasync = `
         
       </div>
       `;
+	    <!-- Process menu navigation -->
+	  const process = `
+	  <ul class="nav nav-tabs mb-3" id="processTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="incentiv-process-tab" data-bs-toggle="tab" data-bs-target="#incentiv-process" type="button" role="tab">Incentive Process</button>
+        </li>
+		<li class="nav-item" role="presentation">
+          <button class="nav-link" id="incentiv-adjustment-tab" data-bs-toggle="tab" data-bs-target="#incentiv-adjustment" type="button" role="tab">Incentive Adjustment</button>
+        </li>       
+    </ul>  
+	
+      <div class="tab-content">
+  <div class="tab-pane fade show active" id="incentiv-process" role="tabpanel" aria-labelledby="incentiv-process-tab">
+
+    <!-- First row: Department dropdown + Process button -->
+    <div class="d-flex align-items-center mb-2">
+      <select id="departmentSelect" class="form-select w-auto me-2" aria-label="Select Department">
+        <option value="">Select Department</option>
+        <option value="IT">Tech</option>
+        <option value="HR">E HR</option>
+        <option value="Finance">E Fin</option>
+      </select>
+
+      <button id="processBtn" class="btn btn-primary" disabled>Process</button>
+      <label for="departmentSelect" class="ms-2 mb-0">
+        <!-- Tooltip icon -->
+      <i class="bi bi-info-circle text-info" data-bs-toggle="tooltip" data-bs-placement="right" title="All data ready for process"></i>
+    </label>
+    </div>
+   
+    <!-- Process count info above right of grid -->
+    <div class="d-flex justify-content-end mb-1">
+      <div class="badge bg-info me-2">2/4 members processed</div>
+    </div>
+
+    <!-- Grid -->
+	 
+    <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover align-middle">
+  <thead class="table-dark">
+    <tr>
+      <th>Employee</th>
+      <th>Department</th>
+	  <th>Designation</th>
+	  <th>Role</th>
+      <th>Achieved</th>
+      <th>Processed Amount</th>
+      <th>Status</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+		<td>AS149-Ravi</td>
+		<td>Tech</td>
+		<td>100</td>
+		<td>91000.00</td>
+		<td>
+		<div class="progress border border-success rounded" style="height: 20px;">
+          <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" 
+               aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">100%
+          </div>
+		 </div>
+		</td>
+	</tr>
+    <tr><td>AS432-RajaRajan</td><td>Tech</td><td>75</td><td>9900.00</td>
+		<td>
+		<div class="progress border border-success rounded" style="height: 20px;">
+          <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" 
+               aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">100%
+          </div>
+		 </div>
+		</td>
+	</tr>
+    <tr><td>AS768-Kamal</td><td>Tech</td><td>100</td><td>90.00</td>
+		<td>
+		<div class="progress border border-inprogress rounded" style="height: 20px;">
+          <div class="progress-bar bg-inprogress" role="progressbar" style="width: 40%;" 
+               aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">40%
+          </div>
+		 </div>
+		</td>
+	</tr>
+    <tr><td>AS932-Raman</td><td>Tech</td><td>50</td><td>90.00</td>
+		<td>
+		<div class="progress border border-inprogress rounded" style="height: 20px;">
+          <div class="progress-bar bg-inprogress" role="progressbar" style="width: 25%;" 
+               aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">25%
+          </div>
+		 </div>
+		</td>
+	</tr>
+    
+  </tbody>
+</table>
+
+    </div>
+
+  </div>
+     
+     
+      <div class="tab-pane fade" id="incentiv-adjustment" role="tabpanel">
+          <form class="row g-3 mb-4">            
+            <div class="container mt-5">    
+              <div class="row mb-4">
+                <div class="col-md-4">        
+                  <label for="adjustment_department" class="form-label">Choose Department</label>
+                    <select id="adjustment_department" class="form-select" name="department">
+                      <option value="" disabled="" selected="">Choose Department</option>
+                      <option value="all">ALL</option>
+                      <option value="it" selected>IT</option>
+                      <option value="hr">Operation</option>
+                      <option value="finance">Finance</option>
+                     </select>
+                </div>
+                <div class="col-md-4">        
+                  <label for="adjustment_role" class="form-label">Choose role</label>
+                  <select id="adjustment_role" class="form-select" name="role">
+                    <option value="" disabled="" selected="">Choose Role</option>
+                    <option value="all">ALL</option>
+                    <option value="manager" selected>Manager</option>
+                    <option value="teamleader">Team Leader</option>
+                    <option value="developer">Developer</option>
+                  </select>
+                </div>
+              </div>
+			<div class="d-flex justify-content-end mb-1">
+				  <div class="badge bg-info me-2">2/4 members edited</div>
+			</div>
+              <!-- Data Table -->
+              <div class="table-responsive">
+              <table id="adjustmentTable" class="table table-hover align-middle table-bordered table-striped">
+                <thead class="table-dark">
+                  <tr>
+                    <th>ID</th>
+                    <th>Department</th>
+                    <th>Role</th>
+                    <th>FY Year</th>
+                    <th>Employee </th>
+                    <th>Achieved</th>
+                    <th>Incentive Amount</th>
+                    <th>Adjustment</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>IT</td>
+                    <td>Programmer</td>
+                    <td>2024-2025</td>
+                    <td>EMP001 - John Doe</td>
+                    <td>95%</td>
+                    <td>920,000.00</td>
+                    <td>
+                      <input type="text" class="form-control form-control-sm" value="922,800.00">
+                    </td>
+                    <td>
+					  
+                      <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
+						<i class="bi bi-pencil-square"></i>
+					  </button>
+					  <button class="btn btn-sm btn-outline-info" title="History">
+						<i class="bi bi-clock-history"></i>
+					  </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>IT</td>
+                    <td>Sr.Programmer</td>
+                    <td>2024-2025</td>
+                    <td>EMP002 - Jane Smith</td>
+                    <td>90%</td>
+                    <td>924,000.00</td>
+                    <td>
+                      <input type="text" class="form-control form-control-sm" value="90.00" disabled>
+                    </td>
+                    <td>
+                      <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
+						<i class="bi bi-pencil-square"></i>
+					  </button>
+					  <button class="btn btn-sm btn-outline-info" title="History">
+						<i class="bi bi-clock-history"></i>
+					  </button>
+                    </td>
+                  </tr>
+				  <tr>
+                    <td>3</td>
+                    <td>IT</td>
+                    <td>Jr.Programmer</td>
+                    <td>2024-2025</td>
+                    <td>EMP005 - Rani</td>
+                    <td>90%</td>
+                    <td>914,000.00</td>
+                    <td>
+                      <input type="text" class="form-control form-control-sm" value="90.00" disabled>
+                    </td>
+                    <td>
+                      <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
+						<i class="bi bi-pencil-square"></i>
+					  </button>
+					  <button class="btn btn-sm btn-outline-info" title="History">
+						<i class="bi bi-clock-history"></i>
+					  </button>
+                    </td>
+                  </tr>
+				  <tr>
+                    <td>4</td>
+                    <td>IT</td>
+                    <td>Sr.Programmer</td>
+                    <td>2024-2025</td>
+                    <td>EMP027 - Ravi</td>
+                    <td>100%</td>
+                    <td>930,000.00</td>
+                    <td>
+                      <input type="text" class="form-control form-control-sm" value="929,500.00">
+                    </td>
+                    <td>
+                      <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
+						<i class="bi bi-pencil-square"></i>
+					  </button>
+					  <button class="btn btn-sm btn-outline-info" title="History">
+						<i class="bi bi-clock-history"></i>
+					  </button>
+                    </td>
+                  </tr>
+                  <!-- Add more rows as needed -->
+                </tbody>
+              </table>
+            </div>       
+          </form>        
+        </div>        
+      </div>      
+    </div>
+	  `;
+	  
 	  <!-- Report menu navigation -->
       const reportTabContent = `
       <ul class="nav nav-tabs mb-3" id="reportTabs" role="tablist">
@@ -2429,247 +2931,7 @@ const datasync = `
 	</div>
       `;
 	  
-	  <!-- Process menu navigation -->
-	  const process = `
-	  <ul class="nav nav-tabs mb-3" id="processTabs" role="tablist">
-        <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="incentiv-process-tab" data-bs-toggle="tab" data-bs-target="#incentiv-process" type="button" role="tab">Incentive Process</button>
-        </li>
-		<li class="nav-item" role="presentation">
-          <button class="nav-link" id="incentiv-adjustment-tab" data-bs-toggle="tab" data-bs-target="#incentiv-adjustment" type="button" role="tab">Incentive Adjustment</button>
-        </li>       
-    </ul>  
 	
-      <div class="tab-content">
-  <div class="tab-pane fade show active" id="incentiv-process" role="tabpanel" aria-labelledby="incentiv-process-tab">
-
-    <!-- First row: Department dropdown + Process button -->
-    <div class="d-flex align-items-center mb-2">
-      <select id="departmentSelect" class="form-select w-auto me-2" aria-label="Select Department">
-        <option value="">Select Department</option>
-        <option value="IT">IT</option>
-        <option value="HR">HR</option>
-        <option value="Finance">Finance</option>
-      </select>
-
-      <button id="processBtn" class="btn btn-primary" disabled>Process</button>
-      <label for="departmentSelect" class="ms-2 mb-0">
-        <!-- Tooltip icon -->
-      <i class="bi bi-info-circle text-info" data-bs-toggle="tooltip" data-bs-placement="right" title="All data ready for process"></i>
-    </label>
-    </div>
-   
-    <!-- Process count info above right of grid -->
-    <div class="d-flex justify-content-end mb-1">
-      <div class="badge bg-info me-2">2/5 members processed</div>
-    </div>
-
-    <!-- Grid -->
-	 
-    <div class="table-responsive">
-    <table class="table table-striped table-bordered table-hover align-middle">
-  <thead class="table-dark">
-    <tr>
-      <th>Employee</th>
-      <th>Department</th>			
-      <th>Achieved</th>
-      <th>Processed Amount</th>
-      <th>Status</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-		<td>AS149-John Doe</td>
-		<td>IT SW</td>
-		<td>85</td>
-		<td>91000.00</td>
-		<td>
-		<div class="progress border border-success rounded" style="height: 20px;">
-          <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" 
-               aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">100%
-          </div>
-		 </div>
-		</td>
-	</tr>
-    <tr><td>A789-Jane Smith</td><td>IT QA</td><td>78</td><td>9900.00</td>
-		<td>
-		<div class="progress border border-success rounded" style="height: 20px;">
-          <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" 
-               aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">100%
-          </div>
-		 </div>
-		</td>
-	</tr>
-    <tr><td>9876-Mike Johnson</td><td>Finance</td><td>72</td><td>90.00</td>
-		<td>
-		<div class="progress border border-inprogress rounded" style="height: 20px;">
-          <div class="progress-bar bg-inprogress" role="progressbar" style="width: 40%;" 
-               aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">40%
-          </div>
-		 </div>
-		</td>
-	</tr>
-    <tr><td>AS487-Emily Davis</td><td>IT</td><td>85</td><td>90.00</td>
-		<td>
-		<div class="progress border border-inprogress rounded" style="height: 20px;">
-          <div class="progress-bar bg-inprogress" role="progressbar" style="width: 25%;" 
-               aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">25%
-          </div>
-		 </div>
-		</td>
-	</tr>
-    <tr><td>A907-Chris Lee</td><td>HR</td><td>90</td><td>90.00</td>
-		<td>
-		<div class="progress border border-danger rounded" style="height: 20px;">
-          <div class="progress-bar bg-danger" role="progressbar" style="width: 0%;" 
-               aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%
-          </div>
-		 </div>
-		</td>
-	</tr>
-  </tbody>
-</table>
-
-    </div>
-
-  </div>
-     
-     
-      <div class="tab-pane fade" id="incentiv-adjustment" role="tabpanel">
-          <form class="row g-3 mb-4">            
-            <div class="container mt-5">    
-              <div class="row mb-4">
-                <div class="col-md-4">        
-                  <label for="adjustment_department" class="form-label">Choose Department</label>
-                    <select id="adjustment_department" class="form-select" name="department">
-                      <option value="" disabled="" selected="">Choose Department</option>
-                      <option value="all">ALL</option>
-                      <option value="it" selected>IT</option>
-                      <option value="hr">Operation</option>
-                      <option value="finance">Finance</option>
-                     </select>
-                </div>
-                <div class="col-md-4">        
-                  <label for="adjustment_role" class="form-label">Choose role</label>
-                  <select id="adjustment_role" class="form-select" name="role">
-                    <option value="" disabled="" selected="">Choose Role</option>
-                    <option value="all">ALL</option>
-                    <option value="manager" selected>Manager</option>
-                    <option value="teamleader">Team Leader</option>
-                    <option value="developer">Developer</option>
-                  </select>
-                </div>
-              </div>
-			<div class="d-flex justify-content-end mb-1">
-				  <div class="badge bg-info me-2">2/4 members edited</div>
-			</div>
-              <!-- Data Table -->
-              <div class="table-responsive">
-              <table id="adjustmentTable" class="table table-hover align-middle table-bordered table-striped">
-                <thead class="table-dark">
-                  <tr>
-                    <th>ID</th>
-                    <th>Department</th>
-                    <th>Role</th>
-                    <th>FY Year</th>
-                    <th>Employee </th>
-                    <th>Achieved</th>
-                    <th>Incentive Amount</th>
-                    <th>Adjustment</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>IT</td>
-                    <td>Programmer</td>
-                    <td>2024-2025</td>
-                    <td>EMP001 - John Doe</td>
-                    <td>95%</td>
-                    <td>920,000.00</td>
-                    <td>
-                      <input type="text" class="form-control form-control-sm" value="922,800.00">
-                    </td>
-                    <td>
-					  
-                      <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
-						<i class="bi bi-pencil-square"></i>
-					  </button>
-					  <button class="btn btn-sm btn-outline-info" title="History">
-						<i class="bi bi-clock-history"></i>
-					  </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>IT</td>
-                    <td>Sr.Programmer</td>
-                    <td>2024-2025</td>
-                    <td>EMP002 - Jane Smith</td>
-                    <td>90%</td>
-                    <td>924,000.00</td>
-                    <td>
-                      <input type="text" class="form-control form-control-sm" value="90.00" disabled>
-                    </td>
-                    <td>
-                      <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
-						<i class="bi bi-pencil-square"></i>
-					  </button>
-					  <button class="btn btn-sm btn-outline-info" title="History">
-						<i class="bi bi-clock-history"></i>
-					  </button>
-                    </td>
-                  </tr>
-				  <tr>
-                    <td>3</td>
-                    <td>IT</td>
-                    <td>Jr.Programmer</td>
-                    <td>2024-2025</td>
-                    <td>EMP005 - Rani</td>
-                    <td>90%</td>
-                    <td>914,000.00</td>
-                    <td>
-                      <input type="text" class="form-control form-control-sm" value="90.00" disabled>
-                    </td>
-                    <td>
-                      <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
-						<i class="bi bi-pencil-square"></i>
-					  </button>
-					  <button class="btn btn-sm btn-outline-info" title="History">
-						<i class="bi bi-clock-history"></i>
-					  </button>
-                    </td>
-                  </tr>
-				  <tr>
-                    <td>4</td>
-                    <td>IT</td>
-                    <td>Sr.Programmer</td>
-                    <td>2024-2025</td>
-                    <td>EMP027 - Ravi</td>
-                    <td>100%</td>
-                    <td>930,000.00</td>
-                    <td>
-                      <input type="text" class="form-control form-control-sm" value="929,500.00">
-                    </td>
-                    <td>
-                      <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
-						<i class="bi bi-pencil-square"></i>
-					  </button>
-					  <button class="btn btn-sm btn-outline-info" title="History">
-						<i class="bi bi-clock-history"></i>
-					  </button>
-                    </td>
-                  </tr>
-                  <!-- Add more rows as needed -->
-                </tbody>
-              </table>
-            </div>       
-          </form>        
-        </div>        
-      </div>      
-    </div>
-	  `;
   const MailSettingContent = `
       <ul class="nav nav-tabs mb-3" id="performanceTabs1" role="tablist">
         <li class="nav-item" role="presentation">
