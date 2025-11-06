@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Tech KRA — Full Report (157 Employees, Department-level Allocation)</title>
+<style>
+:root{--bg:#0f1724;--card:#0b1220;--muted:#9aa4b2;--accent:#7c3aed;--accent2:#06b6d4;--good:#10b981;--danger:#ef4444;font-family:Inter,Arial,Helvetica,sans-serif}
+html,body{height:100%;margin:0;background:linear-gradient(180deg,#071022 0%, #071a2a 60%);color:#e6eef6}
+.container{max-width:1200px;margin:18px auto;padding:20px}
+.header{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:700}
+h1{margin:0;font-size:20px}
+.lead{margin:0;color:var(--muted);font-size:13px}
+.tabs{display:flex;gap:8px;margin-top:14px}
+.tab{padding:10px 14px;border-radius:10px;background:rgba(255,255,255,0.02);cursor:pointer;color:var(--muted);border:1px solid rgba(255,255,255,0.03)}
+.tab.active{background:linear-gradient(90deg, rgba(124,58,237,0.16), rgba(6,182,212,0.06));color:#fff}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);border-radius:12px;padding:16px;margin-top:14px}
+.small{font-size:13px;color:var(--muted)}
+.table-wrap{max-height:620px;overflow:auto;border-radius:8px;padding-right:8px;margin-top:8px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.03)}
+thead th{color:var(--muted);font-size:12px}
+.fail-row{background:linear-gradient(90deg, rgba(239,68,68,0.12), rgba(239,68,68,0.04));color:#fff}
+.valid-yes{color:var(--good);font-weight:600}
+.valid-no{color:var(--danger);font-weight:700}
+.footer{color:var(--muted);font-size:12px;margin-top:12px}
+@media (max-width:900px){.container{padding:12px}}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="logo">TK</div>
+    <div>
+      <h1>Tech — KRA Performance & Incentive (Department Allocation)</h1>
+      <p class="lead">All 157 employees shown in both tabs. Department pool: ₹40,00,000. KRAs validated; failures included per your percentages.</p>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="perf">Performance Review (157 rows)</div>
+    <div class="tab" data-tab="incentive">Incentive Calculation (157 rows)</div>
+  </div>
+
+  <section id="perf" class="panel">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-weight:700;font-size:16px">Performance Review — All Employees</div>
+          <div class="small">KRA targets displayed as percentages (e.g. ≥80%). Failing KRA entries are those where Achieved &lt; Target and are excluded from final %.</div>
+        </div>
+        <div class="small">Total employees: <strong>157</strong></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Role Summary</h3>
+      <div id="roleSummary" class="small">Calculating...</div>
+    </div>
+
+    <div class="card">
+      <h3>Employee Details — Performance</h3>
+      <div class="table-wrap">
+        <table id="perfTable">
+          <thead>
+            <tr>
+              <th>EmpID</th><th>Name</th><th>Role</th><th>Designation</th>
+              <th>KRA1 Target</th><th>KRA1 Wt</th><th>KRA1 Achv</th><th>KRA1 Valid</th>
+              <th>KRA2 Target</th><th>KRA2 Wt</th><th>KRA2 Achv</th><th>KRA2 Valid</th>
+              <th>Final (sum of valid weights)</th>
+            </tr>
+          </thead>
+          <tbody id="perfBody">
+            <!-- rows will be injected here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="incentive" class="panel" style="display:none">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-weight:700;font-size:16px">Incentive Calculation — Department Pool: ₹40,00,000</div>
+          <div class="small">Using your formula with Final Review% (per-employee) as ReviewPct.</div>
+        </div>
+        <div class="small">Total employees: <strong>157</strong></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Role & Total Summary</h3>
+      <div id="incentiveSummary" class="small">Calculating...</div>
+    </div>
+
+    <div class="card">
+      <h3>Employee-level Incentive Details</h3>
+      <div class="table-wrap">
+        <table id="incentiveTable">
+          <thead>
+            <tr>
+              <th>EmpID</th><th>Name</th><th>Role</th><th>Designation</th>
+              <th>Final%</th><th>Role Multiplier</th><th>IndividualWeight</th><th>Per Person (₹)</th>
+            </tr>
+          </thead>
+          <tbody id="incentiveBody">
+            <!-- rows injected here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+// Configuration
+const totalAllotment = 4000000;
+const roleMultipliers = { Manager:2.5, TL:2.0, Developer:1.5, QA:1.3 };
+const kraWeights = { Manager:[50,50], TL:[60,40], Developer:[70,30], QA:[50,50] };
+const kraTarget = 80; // percent threshold
+
+// South Indian name pool (>=157 names)
+const names = [
+  'Arun Kumar','Divya Nair','Pradeep Reddy','Kavya Menon','Karthik Raj','Anitha Krishnan','Vineeth Kumar','Sangeetha Rao','Manoj Reddy','Radha Pillai',
+  'Suresh Babu','Lakshmi Iyer','Raghavendra','Meera Nair','Rohit Shetty','Asha Menon','Hari Prasad','Deepa Nair','Vikram Reddy','Neha Srinivas',
+  'Jayesh Kumar','Keerthi Reddy','Balaji Subramanian','Revathi Nair','Nitin Kumar','Pooja Sharma','Kiran Kumar','Maya Menon','Sathish Reddy','Anu Thomas',
+  'Sumanth Rao','Priya Menon','Aravind Kumar','Shwetha Reddy','Vijay Kumar','Geetha Reddy','Kalyan Kumar','Nisha Nair','Ramesh Babu','Bhavana Rao',
+  'Venkatesh Rao','Aparna Nair','Dinesh Kumar','Priyanka Reddy','Naveen Kumar','Radha Nair','Sridhar Babu','Latha Menon','Gowri Krishnan','Siddharth Reddy',
+  'Vijaya Lakshmi','Arjun Reddy','Malathi Nair','Kumaravel','Sindhu Menon','Ravi Shankar','Sowmya Reddy','Gautham Kumar','Anand Reddy','Manjula Nair',
+  'Shankar Balan','Keerthana Menon','Rajan Reddy','Nithya Sharma','Hema Nair','Prakash Kumar','Bindu Menon','Saketh Reddy','Uma Devi','Rohit Nair',
+  'Harish Kumar','Divya Reddy','Ritika Menon','Sachin Kumar','Preethi Nair','Karthick Kumar','Lalitha Menon','Girish Reddy','Nandini Nair','Sathya Kumar',
+  'Renu Menon','Gopi Reddy','Madhuri Nair','Kumar S','Abhinav Reddy','Megha Nair','Sankar Prasad','Ramya Menon','Nikhil Reddy','Asha Nair',
+  'Rohit Prasad','Padma Menon','Subramanian','Brinda Nair','Arjun R','Malarvizhi','Suresh Kumar','Thara Menon','Lokesh Reddy','Gayathri Nair',
+  'Ranjith Kumar','Veda Nair','Sachin R','Kalyani Menon','Mohan Reddy','Indira Nair','Vikram S','Raji Menon','Gowtham Reddy','Shalini Nair',
+  'Kumaravel S','Laxmi Menon','Narayan Reddy','Amala Nair','Suganth Kumar','Nila Menon','Ramesh Reddy','Kavitha Nair','Praveen R','Divya Menon',
+  'Ashok Reddy','Sujatha Nair','Kishore Kumar','Shobha Menon','Vijay Reddy','Geeta Nair','Sridhar Kumar','Leela Menon','Kiran Reddy','Uma Nair',
+  'Aravind S','Nisha Menon','Raghu Reddy','Poornima Nair','Vasanth Kumar','Abirami Menon','Dharani Reddy','Bhavani Nair','Krishna Reddy','Jayanthi Menon',
+  'Sankar Kumar','Meenakshi Nair','Prakash Reddy','Vimala Menon','Arjun Prasad','Ranjani Nair','Kumar Ch','Radha Devi','Sathyan Reddy','Nivedita Menon',
+  'Hari Om','Padmini Nair','Srinath Reddy','Kalaivani Menon','Ramanathan','Uma Lakshmi','Gowri Devi','Venkata Reddy','Anitha Menon','Manikandan'
+];
+
+// Build employees with AS001..AS157 and assign roles
+const employees = [];
+let counter = 1;
+function AS(id){ return 'AS' + String(id).padStart(3,'0'); }
+
+// Role distribution
+const distribution = [
+  ...Array(10).fill('Manager'),
+  ...Array(12).fill('TL'),
+  ...Array(120).fill('Developer'),
+  ...Array(15).fill('QA')
+];
+
+for(let i=0;i<157;i++){
+  const role = distribution[i];
+  let designation = '';
+  if(role==='Manager') designation = (i%10<4)?'Senior Manager':(i%10<8)?'Manager':'Assistant Manager';
+  if(role==='TL') designation = (i%12<6)?'Senior TL':'Team Lead';
+  if(role==='Developer') designation = (i%120<60)?'Senior Developer':'Junior Developer';
+  if(role==='QA') designation = (i%15<6)?'Senior QA':'QA Engineer';
+  const name = names[i % names.length];
+  employees.push({ id:AS(counter), name, role, designation });
+  counter++;
+}
+
+// Assign achieved groups per role pattern
+function setAchievedPattern(){
+  // Managers 3@90,4@85,3@80
+  const mgrs = employees.filter(e=>e.role==='Manager');
+  mgrs.forEach((m,i)=>{ m.base = (i<3)?90:(i<7)?85:80; m.kra=[{},{}]; m.kra[0].achieved = m.base; m.kra[1].achieved = m.base; });
+  // TLs 4@95,2@90,6@85
+  const tls = employees.filter(e=>e.role==='TL');
+  tls.forEach((t,i)=>{ t.base = (i<4)?95:(i<6)?90:85; t.kra=[{},{}]; t.kra[0].achieved = t.base; t.kra[1].achieved = t.base; });
+  // Devs 50@95,40@90,30@85
+  const devs = employees.filter(e=>e.role==='Developer');
+  devs.forEach((d,i)=>{ d.base = (i<50)?95:(i<90)?90:85; d.kra=[{},{}]; d.kra[0].achieved = d.base; d.kra[1].achieved = d.base; });
+  // QAs 4@95,3@90,8@85
+  const qas = employees.filter(e=>e.role==='QA');
+  qas.forEach((q,i)=>{ q.base = (i<4)?95:(i<7)?90:85; q.kra=[{},{}]; q.kra[0].achieved = q.base; q.kra[1].achieved = q.base; });
+}
+setAchievedPattern();
+
+// Inject failures randomly: Managers 2% (~1), TLs 3% (~1), Devs 5% (~6), QA 4% (~1)
+function injectFailures(){
+  function pick(arr, pct){
+    const n = Math.max(1, Math.round(arr.length * pct/100));
+    const res = new Set();
+    while(res.size < n){ res.add(Math.floor(Math.random()*arr.length)); }
+    return Array.from(res);
+  }
+  const mgrs = employees.filter(e=>e.role==='Manager');
+  const tls = employees.filter(e=>e.role==='TL');
+  const devs = employees.filter(e=>e.role==='Developer');
+  const qas = employees.filter(e=>e.role==='QA');
+  const mFail = pick(mgrs,2);
+  const tFail = pick(tls,3);
+  const dFail = pick(devs,5);
+  const qFail = pick(qas,4);
+  function applyFail(arr, idxs){
+    idxs.forEach(i=>{
+      const emp = arr[i];
+      const k = Math.random()<0.5?0:1;
+      emp.kra[k].achieved = 75 + Math.floor(Math.random()*5); // 75-79
+      emp.kra[k].failed = true;
+    });
+  }
+  applyFail(mgrs,mFail); applyFail(tls,tFail); applyFail(devs,dFail); applyFail(qas,qFail);
+}
+injectFailures();
+
+// Fill KRA weights and compute final % (sum of valid weights)
+employees.forEach(e=>{
+  const w = kraWeights[e.role];
+  e.kra[0].weight = w[0]; e.kra[1].weight = w[1];
+  e.kra[0].target = '≥80%'; e.kra[1].target = '≥80%';
+  e.kra[0].valid = e.kra[0].achieved >= kraTarget; e.kra[1].valid = e.kra[1].achieved >= kraTarget;
+  const v1 = e.kra[0].valid? e.kra[0].weight:0;
+  const v2 = e.kra[1].valid? e.kra[1].weight:0;
+  e.final = v1 + v2;
+  e.finalText = ( (e.kra[0].valid? e.kra[0].weight:0) + ' + ' + (e.kra[1].valid? e.kra[1].weight:0) + ' = ' + e.final );
+});
+
+// Incentive calc using department-level pool
+employees.forEach(e=>{ e.roleMultiplier = roleMultipliers[e.role]; e.individualWeight = e.final * e.roleMultiplier; });
+const totalWeight = employees.reduce((s,e)=>s+e.individualWeight,0);
+employees.forEach(e=>{ e.perPersonINR = Math.round(((e.individualWeight/totalWeight) * totalAllotment) * 100)/100; });
+
+// Adjust rounding residue to ensure sum equals totalAllotment (distribute difference to highest weight)
+let sumPer = employees.reduce((s,e)=>s+e.perPersonINR,0);
+sumPer = Math.round(sumPer*100)/100;
+let residue = Math.round((totalAllotment - sumPer)*100)/100;
+if(Math.abs(residue) >= 0.01){
+  // add residue to employee with max individualWeight
+  const maxE = employees.reduce((a,b)=> a.individualWeight > b.individualWeight ? a : b );
+  maxE.perPersonINR = Math.round((maxE.perPersonINR + residue)*100)/100;
+}
+
+// Render Perf table and Incentive table
+const perfBody = document.getElementById('perfBody');
+employees.forEach(e=>{
+  const tr = document.createElement('tr');
+  if(!(e.kra[0].valid && e.kra[1].valid)) tr.className='fail-row';
+  tr.innerHTML = `
+    <td>${e.id}</td>
+    <td>${e.name}</td>
+    <td>${e.role}</td>
+    <td>${e.designation}</td>
+    <td>${e.kra[0].target}</td>
+    <td>${e.kra[0].weight}%</td>
+    <td>${e.kra[0].achieved}%</td>
+    <td>${e.kra[0].valid?'<span class="valid-yes">Yes</span>':'<span class="valid-no">No</span>'}</td>
+    <td>${e.kra[1].target}</td>
+    <td>${e.kra[1].weight}%</td>
+    <td>${e.kra[1].achieved}%</td>
+    <td>${e.kra[1].valid?'<span class="valid-yes">Yes</span>':'<span class="valid-no">No</span>'}</td>
+    <td>${e.finalText}</td>
+  `;
+  perfBody.appendChild(tr);
+});
+
+// Role summary
+function computeRoleSummary(){
+  const roles = ['Manager','TL','Developer','QA'];
+  const rows = roles.map(r=>{
+    const list = employees.filter(e=>e.role===r);
+    const count = list.length;
+    const avgFinal = Math.round((list.reduce((s,e)=>s+e.final,0)/count)*100)/100;
+    const meetingBoth = list.filter(e=>e.final === (kraWeights[r][0]+kraWeights[r][1])).length;
+    const totalIncentive = Math.round(list.reduce((s,e)=>s+e.perPersonINR,0));
+    return {role:r,count,avgFinal,meetingBoth,totalIncentive};
+  });
+  return rows;
+}
+
+const rs = computeRoleSummary();
+const roleSummaryEl = document.getElementById('roleSummary');
+let roleHtml = '<table><thead><tr><th>Role</th><th>Count</th><th>Avg Final %</th><th>Meeting Both KRA</th><th>Total Incentive (₹)</th></tr></thead><tbody>';
+rs.forEach(r=>{ roleHtml += `<tr><td>${r.role}</td><td>${r.count}</td><td>${r.avgFinal}%</td><td>${r.meetingBoth}</td><td>₹${r.totalIncentive.toLocaleString()}</td></tr>` });
+roleHtml += '</tbody></table>';
+roleSummaryEl.innerHTML = roleHtml;
+
+// Render incentive table
+const incBody = document.getElementById('incentiveBody');
+employees.forEach(e=>{
+  const tr = document.createElement('tr');
+  if(!(e.kra[0].valid && e.kra[1].valid)) tr.className='fail-row';
+  tr.innerHTML = `
+    <td>${e.id}</td>
+    <td>${e.name}</td>
+    <td>${e.role}</td>
+    <td>${e.designation}</td>
+    <td>${e.final}%</td>
+    <td>${e.roleMultiplier}</td>
+    <td>${Math.round(e.individualWeight*100)/100}</td>
+    <td>₹${(Math.round(e.perPersonINR)).toLocaleString()}</td>
+  `;
+  incBody.appendChild(tr);
+});
+
+// Incentive summary
+const incSummary = document.getElementById('incentiveSummary');
+let incHtml = '<table><thead><tr><th>Role</th><th>Count</th><th>Total Incentive (₹)</th></tr></thead><tbody>';
+rs.forEach(r=>{ incHtml += `<tr><td>${r.role}</td><td>${r.count}</td><td>₹${r.totalIncentive.toLocaleString()}</td></tr>` });
+incHtml += `<tr><th colspan="2">Department Total</th><th>₹${totalAllotment.toLocaleString()}</th></tr></tbody></table>`;
+incSummary.innerHTML = incHtml;
+
+// Tabs logic
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    const sel = tab.getAttribute('data-tab');
+    document.querySelectorAll('.panel').forEach(p=>p.style.display='none');
+    document.getElementById(sel).style.display='block';
+    window.scrollTo(0,0);
+  });
+});
+
+</script>
+</body>
+</html>
