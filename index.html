@@ -901,7 +901,7 @@
               </select>
             </div>
             <div class="col-md-4">
-              <label for="ebitda_amount_fy" class="form-label">EBITDA Amount</label>
+              <label for="ebitda_amount_fy" class="form-label">Incentive Amount</label>
               <input type="number" class="form-control" id="ebitda_amount_fy" 
                      name="ebitda_amount" maxlength="12" placeholder="Enter Incentive Amount">
             </div>
@@ -941,6 +941,10 @@
               <button class="nav-link" id="desig-tab" data-bs-toggle="tab"
                       data-bs-target="#desig-tab-pane" type="button" role="tab">Designation-wise</button>
             </li>
+			<li class="nav-item" role="presentation">
+              <button class="nav-link" id="emp-tab" data-bs-toggle="tab"
+                      data-bs-target="#emp-tab-pane" type="button" role="tab">Employee-wise</button>
+            </li>
           </ul>
 		   <div class="tab-content" id="allocationTabsContent">
 
@@ -955,11 +959,11 @@
                     <option value="2025-2026">FY 2025-2026</option>
                   </select>
                 </div>
-                <div class="col-md-4">
-                  <label for="ebitda_amount_dep" class="form-label">EBITDA Amount</label>
-                  <input type="number" class="form-control" id="ebitda_amount_dep"
-                         name="ebitda_amount" maxlength="12" placeholder="EBITDA Amount" disabled >
-                </div>
+                <!-- <div class="col-md-4"> -->
+                  <!-- <label for="ebitda_amount_dep" class="form-label">EBITDA Amount</label> -->
+                  <!-- <input type="number" class="form-control" id="ebitda_amount_dep" -->
+                         <!-- name="ebitda_amount" maxlength="12" placeholder="EBITDA Amount" disabled > -->
+                <!-- </div> -->
                 <div class="form-check form-switch col-md-4">
                   <input class="form-check-input" type="checkbox" id="enableautocalculate_dep">
                   <label class="form-check-label" for="enableautocalculate_dep">
@@ -1073,11 +1077,11 @@
 					<option value="2025-2026">E Infra</option>
                   </select>
                 </div>
-                <div class="col-md-2">
-                  <label for="ebitda_amount_dep" class="form-label">EBITDA Amount</label>
-                  <input type="number" class="form-control" id="ebitda_amount_dep"
-                         name="ebitda_amount" maxlength="12" placeholder="EBITDA Amount" disabled >
-                </div>
+                <!-- <div class="col-md-2"> -->
+                  <!-- <label for="ebitda_amount_dep" class="form-label">EBITDA Amount</label> -->
+                  <!-- <input type="number" class="form-control" id="ebitda_amount_dep" -->
+                         <!-- name="ebitda_amount" maxlength="12" placeholder="EBITDA Amount" disabled > -->
+                <!-- </div> -->
                 <div class="form-check form-switch col-md-4">
                   <input class="form-check-input" type="checkbox" id="enableautocalculate_dep">
                   <label class="form-check-label" for="enableautocalculate_dep">
@@ -1188,11 +1192,11 @@
 					<option value="2025-2026">QA</option>
                   </select>
                 </div>
-                <div class="col-md-2">
-                  <label for="ebitda_amount_dep" class="form-label">EBITDA Amount</label>
-                  <input type="number" class="form-control" id="ebitda_amount_dep"
-                         name="ebitda_amount" maxlength="12" placeholder="EBITDA Amount" disabled >
-                </div>
+                <!-- <div class="col-md-2"> -->
+                  <!-- <label for="ebitda_amount_dep" class="form-label">EBITDA Amount</label> -->
+                  <!-- <input type="number" class="form-control" id="ebitda_amount_dep" -->
+                         <!-- name="ebitda_amount" maxlength="12" placeholder="EBITDA Amount" disabled > -->
+                <!-- </div> -->
                 <div class="form-check form-switch col-md-4">
                   <input class="form-check-input" type="checkbox" id="enableautocalculate_dep">
                   <label class="form-check-label" for="enableautocalculate_dep">
@@ -1265,7 +1269,86 @@
                 </div>
 			  </form>
             </div>
+			
+			 <!-- Employee-wise -->
+            <div class="tab-pane fade" id="emp-tab-pane" role="tabpanel" aria-labelledby="emp-tab">
+              <form class="row g-3" name="desigEbitdaForm">
+				 <!-- File Upload -->
+				  <div class="col-md-4">
+					<label class="form-label">Bulk Upload File</label>
+					<input type="file" class="form-control" />
+						 
+				
+				</div>
+				<div class="col-md-4">
+				<a href="tempdownload/template.xlsx" download="Template.xlsx" class="btn btn-success btn-sm mt-2">
+				  <i class="bi bi-download me-1"></i> Download Template
+				</a>
+				</div>
+                
+                <div class="col-12 text-end">
+                  <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-save me-1"></i> Save
+                  </button>
+                </div>
 
+                <div class="col-12 mt-3">
+                  <table id="depEbitdaTable" class="table table-hover align-middle table-bordered table-striped">
+                    <thead class="table-dark">
+                      <tr>
+                        <th>ID</th>
+						<th>FY</th>
+                        <th>Department</th>
+						<th>Role</th>
+						<th>Designation</th>
+						<th>Employee Name</th>
+                        <th>% of Profit</th>
+                        <th>Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+						<td>25-26</td>
+                        <td>Tech</td>
+						<td>Manager</td>
+						<td>Junior Manager</td>
+						<td>AS14-Rahul</td>
+                        <td>2%</td>
+                        <td>
+                            4,00,000.00
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+						<td>25-26</td>
+                        <td>Tech</td>
+						<td>Manager</td>
+						<td>Senior Manager</td>
+						<td>AS334-Sam</td>
+                        <td>3%</td>
+                        <td>
+                           6,00,000.00 
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>3</td>
+						<td>25-26</td>
+                        <td>Tech</td>
+						<td>Manager</td>
+						<td>GROUP Manager</td>
+						<td>AS568-Pradeep</td>
+                        <td>3%</td>
+                        <td>
+                           6,00,000.00 
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+			  </form>
+            </div>
+			
           </div>
 		  
         </div>
@@ -1401,17 +1484,21 @@
       <form class="row g-3 mb-4" name="excludeDeptForm">
 	  <div>
 			  <div class="col-md-4">
-				  <input class="form-check-input" type="radio" name="ebitda_option" id="ebitda_yes" value="yes" checked>
-				  <label class="form-check-label" for="ebitda_yes">
+				  <input class="form-check-input" type="radio" id="exclude_dept" name="ebitda_option" value="department" checked>
+				  <label class="form-check-label" for="exclude_dept">
 					Exclude Department
 				  </label>
-				  <input class="form-check-input" type="radio" name="ebitda_option" id="ebitda_no" value="no">
-				  <label class="form-check-label" for="ebitda_no">
+				   
+				</div>
+				<div class="col-md-4">
+				   
+				  <input class="form-check-input" type="radio" name="ebitda_option" id="exclude_emp" value="employee">
+				  <label class="form-check-label" for="exclude_emp">
 					Exclude Employee
 				  </label>
 				</div>
 		  </div>
-        <div class="col-md-3">
+				<div class="col-md-3">
                   <label for="dep_ebitda_select" class="form-label">Financial Year</label>
                   <select id="dep_ebitda_select" class="form-select" name="financial_year">
                     <option selected disabled>Choose FY</option>
@@ -1429,16 +1516,16 @@
 					<option value="2025-2026">E Infra</option>
                   </select>
                 </div>
-				<div class="col-md-3">
+				<div class="col-md-3 role-section "  style="display: none;">
                   <label for="dep_ebitda_select" class="form-label">Select Role</label>
-                  <select id="dep_ebitda_select" class="form-select" name="role" disabled>
+                  <select id="dep_ebitda_select" class="form-select" name="role" >
                     <option selected disabled>Select Role</option>
                      
                   </select>
                 </div>
-				<div class="col-md-3">
+				<div class="col-md-3 employee-section " style="display: none;">
                   <label for="dep_ebitda_select" class="form-label">Select Employee</label>
-                  <select id="dep_ebitda_select" class="form-select" name="employee" disabled>
+                  <select id="dep_ebitda_select" class="form-select" name="employee" >
                     <option selected disabled>Select Employee</option>
                   </select>
                 </div>
@@ -1529,6 +1616,15 @@
             <option value="AS932-Raman">Developer</option>
           </select>
         </div>
+		<div class="col-md-3">
+          <label for="hold_employee" class="form-label">Choose Designation</label>
+          <select id="hold_employee" class="form-select" name="employee">
+            <option value="" disabled selected>Choose Designation</option>
+            <option value="AS123-Ravi">Jr.Manager</option>
+            <option value="AS432-RajaRajan">Sr.Manager</option>
+            <option value="AS932-Raman">Group Manager</option>
+          </select>
+        </div>
         <div class="col-md-3">
           <label for="hold_year" class="form-label text-muted">Cap score</label>
           <input class="form-control" id="hold_year" placeholder="0">
@@ -1546,6 +1642,7 @@
 				<th>FY</th>
                 <th>Department</th>
                 <th>Role</th>
+				<th>Designation</th>
                 <th>Score</th>
 				<th>Level</th>
                 <th>Action</th>
@@ -1557,8 +1654,9 @@
 				<td>FY 25-26</td>
                 <td>Tech</td>
                 <td>Manager</td>
-				<td>9</td>
-                <td>L7,L6,L8</td>
+				<td>Jr.Manager</td>
+				<td>7</td>
+                <td>L6</td>
                 <td>
                   <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
                         <i class="bi bi-pencil-square"></i>
@@ -1575,9 +1673,10 @@
                 <td>2</td>
                 <td>FY 25-26</td>
                 <td>Tech</td>
-                <td>TL</td>
-				<td>6</td>
-                <td>L5,L4</td>
+                <td>Manager</td>
+				<td>Sr.Manager</td>
+				<td>8</td>
+                <td>L7</td>
                 <td>
                   <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
                         <i class="bi bi-pencil-square"></i>
@@ -1594,9 +1693,10 @@
                 <td>3</td>
                 <td>FY 25-26</td>
                 <td>Tech</td>
-                <td>Developer</td>
-				<td>4</td>
-                <td>L3,L2</td>
+                <td>Manager</td>
+				<td>Group Manager</td>
+				<td>9</td>
+                <td>L8,L9</td>
                 <td>
                   <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
                         <i class="bi bi-pencil-square"></i>
@@ -1762,6 +1862,15 @@ const mappingTabsContent = `
             <option value="AS932-Raman">Developer</option>
           </select>
         </div>
+		<div class="col-md-3">
+          <label for="hold_employee" class="form-label">Choose Designation</label>
+          <select id="hold_employee" class="form-select" name="employee">
+            <option value="" disabled selected>Choose Designation</option>
+            <option value="AS123-Ravi">TL</option>
+            <option value="AS432-RajaRajan">Lead Engineer</option>
+            <option value="AS932-Raman">Sr.Lead Engineer</option>
+          </select>
+        </div>
     
     <!-- KRA Description -->
    <div class="col-md-12">
@@ -1911,6 +2020,15 @@ const mappingTabsContent = `
             <option value="AS123-Ravi">Manager</option>
             <option value="AS432-RajaRajan">TL</option>
             <option value="AS932-Raman">Developer</option>
+          </select>
+        </div>
+		<div class="col-md-3">
+          <label for="hold_employee" class="form-label">Choose Designation</label>
+          <select id="hold_employee" class="form-select" name="employee">
+            <option value="" disabled selected>Choose Designation</option>
+            <option value="AS123-Ravi">TL</option>
+            <option value="AS432-RajaRajan">Lead Engineer</option>
+            <option value="AS932-Raman">Sr.Lead Engineer</option>
           </select>
         </div>
 		<div class="col-md-3">
@@ -2335,6 +2453,9 @@ const datasync = `
 		<li class="nav-item" role="presentation">
           <button class="nav-link" id="incentiv-adjustment-tab" data-bs-toggle="tab" data-bs-target="#incentiv-adjustment" type="button" role="tab">Incentive Adjustment</button>
         </li>       
+		<li class="nav-item" role="presentation">
+          <button class="nav-link" id="incentiv-Calculation-tab" data-bs-toggle="tab" data-bs-target="#incentiv-Calculation" type="button" role="tab">Incentive Calculation</button>
+        </li>       
     </ul>  
 	
       <div class="tab-content">
@@ -2456,8 +2577,8 @@ const datasync = `
 		<td>TL</td>
 		<td>Sr.Lead Engineer</td>
 		<td>AS432-RajaRajan</td>
-		<td>75</td>
-		<td>2,79,792.00</td>
+		<td>100</td>
+		<td>3,73,056.00</td>
 		<td>
 		<div class="progress border border-success rounded" style="height: 20px;">
           <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" 
@@ -2471,8 +2592,8 @@ const datasync = `
 		<td>TL</td>
 		<td>Jr.Lead Engineer</td>
 		<td>AS768-Kamal</td>
-		<td>100</td>
-		<td>3,73,056.00</td>
+		<td>75</td>
+		<td>2,79,792.00</td>
 		<td>
 		<div class="progress border border-success rounded" style="height: 20px;">
           <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" 
@@ -2690,7 +2811,15 @@ const datasync = `
             </div>       
           </form>        
         </div>        
-      </div>      
+      </div>   
+		<div class="tab-pane fade" id="incentiv-Calculation" role="tabpanel">
+          <form class="row g-3 mb-4">
+		  <a href="tempdownload/kra_sample.html">Sample Incentive calculation</a>
+		  <!-- <a href="tempdownload/template.xlsx" download="Template.xlsx" class="btn btn-success btn-sm mt-2"> -->
+				  <!-- <i class="bi bi-download me-1"></i> Download Template -->
+				<!-- </a> -->
+		  </form>
+		</div>
     </div>
 	  `;
 	  
