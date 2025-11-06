@@ -2182,7 +2182,7 @@ const datasync = `
       <div class="col-md-3">
 		  <div class="card employee-tile p-3 border rounded shadow-sm disabled-div" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="top" title="Name: AS149-Ravi| Role: IT Programmer| KRA: 3" >
 			<div class="employee-name mb-1">AS149-Ravi</div>
-			<div class="employee-role mb-1">Team Lead</div>
+			<div class="employee-role mb-1">Lead Engineer</div>
 			<!-- <div class="employee-dept">Assigned KRA: <span class="badge bg-primary">3</span> -->
 			<div class="progress border border-success rounded" style="height:0px;">
 				<div class="progress-bar bg-success" role="progressbar" style="width: 100%;" 
@@ -2196,7 +2196,7 @@ const datasync = `
         <div class="card employee-tile p-3 border rounded shadow-sm" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="top" 
 			   title="Name: AS232-Raman| Role: IT Sr.Programmer| KRA: 4">
 			<div class="employee-name mb-1">AS432-RajaRajan</div>
-			<div class="employee-role mb-1">Sr.Team Lead</div>
+			<div class="employee-role mb-1">Sr.Lead Engineer</div>
 			<!-- <div class="employee-dept">Assigned KRA: <span class="badge bg-primary">3</span> -->
 			<div class="progress border border-success rounded" style="height:0px;">
 				<div class="progress-bar bg-success" role="progressbar" style="width: 100%;" 
@@ -2211,7 +2211,7 @@ const datasync = `
         <div class="card employee-tile p-3 border rounded shadow-sm" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="top" 
 			   title="Name:AS768-Kamal| Role: IT Programmer Analyst| KRA: 2">
 			<div class="employee-name mb-1">AS768-Kamal</div>
-			<div class="employee-role mb-1">Jr.Team Lead</div>
+			<div class="employee-role mb-1">Jr.Lead Engineer</div>
 			<!-- <div class="employee-dept">Assigned KRA: <span class="badge bg-primary">3</span> -->
 			<div class="progress border border-inprogress  rounded" style="height:0px;">
 				<div class="progress-bar bg-inprogress " role="progressbar" style="width: 72%" 
@@ -2226,7 +2226,7 @@ const datasync = `
         <div class="card employee-tile p-3 border rounded shadow-sm" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="top" 
 			   title="Name:AS980-Kavya| Role: IT Programmer Analyst| KRA: 3">
 			<div class="employee-name mb-1">AS932-Raman</div>
-			<div class="employee-role mb-1">Team Lead</div>
+			<div class="employee-role mb-1">Lead Engineer</div>
 			<!-- <div class="employee-dept">Assigned KRA: <span class="badge bg-primary">3</span> -->
 			<div class="progress border border-danger " style="height:0px;">
 				<div class="progress-bar bg-danger" role="progressbar" style="width:0%" 
@@ -2340,25 +2340,35 @@ const datasync = `
       <div class="tab-content">
   <div class="tab-pane fade show active" id="incentiv-process" role="tabpanel" aria-labelledby="incentiv-process-tab">
 
-    <!-- First row: Department dropdown + Process button -->
-    <div class="d-flex align-items-center mb-2">
-      <select id="departmentSelect" class="form-select w-auto me-2" aria-label="Select Department">
-        <option value="">Select Department</option>
-        <option value="IT">Tech</option>
-        <option value="HR">E HR</option>
-        <option value="Finance">E Fin</option>
-      </select>
-
-      <button id="processBtn" class="btn btn-primary" disabled>Process</button>
-      <label for="departmentSelect" class="ms-2 mb-0">
-        <!-- Tooltip icon -->
-      <i class="bi bi-info-circle text-info" data-bs-toggle="tooltip" data-bs-placement="right" title="All data ready for process"></i>
-    </label>
+   <form class="row g-3 mb-4 align-items-end">
+    
+   <div class="col-md-3">
+                  <label for="dep_ebitda_select" class="form-label">Financial Year</label>
+                  <select id="dep_ebitda_select" class="form-select" name="financial_year">
+                    <option selected disabled>Choose FY</option>
+                    <option value="2024-2025">FY 2024-2025</option>
+                    <option value="2025-2026">FY 2025-2026</option>
+                  </select>
+                </div>
+        <div class="col-md-3">
+          <label for="hold_department" class="form-label">Choose Department</label>
+          <select id="hold_department" class="form-select" name="department">
+            <option value="" disabled selected>Choose Department</option>
+            <option value="it">Tech</option>
+            <option value="hr">E Fin</option>
+            <option value="finance">E Infra</option>
+          </select>
+        </div>
+    <!-- Save button aligned bottom right -->
+    <div class="col-md-6">
+      <button type="submit" class="btn btn-primary btn-sm px-4">Process</button>
     </div>
+    
+  </form>
    
     <!-- Process count info above right of grid -->
     <div class="d-flex justify-content-end mb-1">
-      <div class="badge bg-info me-2">2/4 members processed</div>
+      <div class="badge bg-info me-2">9/11 members processed</div>
     </div>
 
     <!-- Grid -->
@@ -2367,21 +2377,25 @@ const datasync = `
     <table class="table table-striped table-bordered table-hover align-middle">
   <thead class="table-dark">
     <tr>
-      <th>Employee</th>
-      <th>Department</th>
-	  <th>Designation</th>
-	  <th>Role</th>
-      <th>Achieved</th>
-      <th>Processed Amount</th>
-      <th>Status</th> 
+	<th>FY</th>
+	<th>Department</th>
+	<th>Role</th>
+	<th>Designation</th>
+    <th>Employee</th>
+    <th>Achieved%</th>
+    <th>Processed Amount</th>
+    <th>Status</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-		<td>AS149-Ravi</td>
+		<td>FY 25-26</td>
 		<td>Tech</td>
+		<td>Manager</td>
+		<td>Group Manager</td>
+		<td>AS14-Rahul</td>
 		<td>100</td>
-		<td>91000.00</td>
+		<td>4,47,668.00</td>
 		<td>
 		<div class="progress border border-success rounded" style="height: 20px;">
           <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" 
@@ -2390,7 +2404,13 @@ const datasync = `
 		 </div>
 		</td>
 	</tr>
-    <tr><td>AS432-RajaRajan</td><td>Tech</td><td>75</td><td>9900.00</td>
+    <tr><td>FY 25-26</td>
+		<td>Tech</td>
+		<td>Manager</td>
+		<td>Sr.Manager</td>
+		<td>AS334-Sam</td>
+		<td>100</td>
+		<td>4,47,668.00</td>
 		<td>
 		<div class="progress border border-success rounded" style="height: 20px;">
           <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" 
@@ -2399,7 +2419,122 @@ const datasync = `
 		 </div>
 		</td>
 	</tr>
-    <tr><td>AS768-Kamal</td><td>Tech</td><td>100</td><td>90.00</td>
+    <tr><td>FY 25-26</td>
+		<td>Tech</td>
+		<td>Manager</td>
+		<td>Jr.Manager</td>
+		<td>AS568-Pradeep</td>
+		<td>90</td>
+		<td>4,02,901.00</td>
+		<td>
+		<div class="progress border border-success rounded" style="height: 20px;">
+          <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" 
+               aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">100%
+          </div>
+		 </div>
+		</td>
+	</tr>
+     
+	<tr>
+		<td>FY 25-26</td>
+		<td>Tech</td>
+		<td>TL</td>
+		<td>Lead Engineer</td>
+		<td>AS149-Ravi</td>
+		<td>100</td>
+		<td>3,73,056.00</td>
+		<td>
+		<div class="progress border border-success rounded" style="height: 20px;">
+          <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" 
+               aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">100%
+          </div>
+		 </div>
+		</td>
+	</tr>
+    <tr><td>FY 25-26</td>
+		<td>Tech</td>
+		<td>TL</td>
+		<td>Sr.Lead Engineer</td>
+		<td>AS432-RajaRajan</td>
+		<td>75</td>
+		<td>2,79,792.00</td>
+		<td>
+		<div class="progress border border-success rounded" style="height: 20px;">
+          <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" 
+               aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">100%
+          </div>
+		 </div>
+		</td>
+	</tr>
+    <tr><td>FY 25-26</td>
+		<td>Tech</td>
+		<td>TL</td>
+		<td>Jr.Lead Engineer</td>
+		<td>AS768-Kamal</td>
+		<td>100</td>
+		<td>3,73,056.00</td>
+		<td>
+		<div class="progress border border-success rounded" style="height: 20px;">
+          <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" 
+               aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">100%
+          </div>
+		 </div>
+		</td>
+	</tr>
+    <tr>
+		<td>FY 25-26</td>
+		<td>Tech</td>
+		<td>TL</td>
+		<td>Lead Engineer</td>
+		<td>AS932-Raman</td>
+		<td>50</td>
+		<td>1,86,528.00</td>
+		<td>
+		<div class="progress border border-success rounded" style="height: 20px;">
+          <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" 
+               aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">100%
+          </div>
+		 </div>
+		</td>
+	</tr>
+	<tr>
+		<td>FY 25-26</td>
+		<td>Tech</td>
+		<td>Developer</td>
+		<td>Specialist Engineer</td>
+		<td>AS144-Geo</td>
+		<td>100</td>
+		<td>2,98,445.00</td>
+		<td>
+		<div class="progress border border-success rounded" style="height: 20px;">
+          <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" 
+               aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">100%
+          </div>
+		 </div>
+		</td>
+	</tr>
+    <tr><td>FY 25-26</td>
+		<td>Tech</td>
+		<td>Developer</td>
+		<td>Sr.Specialist Engineer</td>
+		<td>AS492-Selvi</td>
+		<td>95</td>
+		<td>2,83,523.00</td>
+		<td>
+		<div class="progress border border-success rounded" style="height: 20px;">
+          <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" 
+               aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">100%
+          </div>
+		 </div>
+		</td>
+	</tr>
+    <tr><td>FY 25-26</td>
+		<td>Tech</td>
+		<td>Developer</td>
+		<td>Specialist Engineer</td>
+		<td>AS262-Vasanth</td>
+		<td>100</td>
+		<td>0.00</td>
 		<td>
 		<div class="progress border border-inprogress rounded" style="height: 20px;">
           <div class="progress-bar bg-inprogress" role="progressbar" style="width: 40%;" 
@@ -2408,11 +2543,18 @@ const datasync = `
 		 </div>
 		</td>
 	</tr>
-    <tr><td>AS932-Raman</td><td>Tech</td><td>50</td><td>90.00</td>
+    <tr>
+		<td>FY 25-26</td>
+		<td>Tech</td>
+		<td>Developer</td>
+		<td>Sr.Specialist Engineer</td>
+		<td>AS532-Jothi</td>
+		<td>70</td>
+		<td>0.00</td>
 		<td>
-		<div class="progress border border-inprogress rounded" style="height: 20px;">
+		<div class="progress border border-inprogress rounded" style="height: 0px;">
           <div class="progress-bar bg-inprogress" role="progressbar" style="width: 25%;" 
-               aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">25%
+               aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">0%
           </div>
 		 </div>
 		</td>
@@ -2429,17 +2571,24 @@ const datasync = `
       <div class="tab-pane fade" id="incentiv-adjustment" role="tabpanel">
           <form class="row g-3 mb-4">            
             <div class="container mt-5">    
-              <div class="row mb-4">
-                <div class="col-md-4">        
-                  <label for="adjustment_department" class="form-label">Choose Department</label>
-                    <select id="adjustment_department" class="form-select" name="department">
-                      <option value="" disabled="" selected="">Choose Department</option>
-                      <option value="all">ALL</option>
-                      <option value="it" selected>IT</option>
-                      <option value="hr">Operation</option>
-                      <option value="finance">Finance</option>
-                     </select>
+				<div class="row mb-4">
+                <div class="col-md-3">
+                  <label for="dep_ebitda_select" class="form-label">Financial Year</label>
+                  <select id="dep_ebitda_select" class="form-select" name="financial_year">
+                    <option selected disabled>Choose FY</option>
+                    <option value="2024-2025">FY 2024-2025</option>
+                    <option value="2025-2026">FY 2025-2026</option>
+                  </select>
                 </div>
+				<div class="col-md-3">
+				  <label for="hold_department" class="form-label">Choose Department</label>
+				  <select id="hold_department" class="form-select" name="department">
+					<option value="" disabled selected>Choose Department</option>
+					<option value="it">Tech</option>
+					<option value="hr">E Fin</option>
+					<option value="finance">E Infra</option>
+				  </select>
+				</div>
                 <div class="col-md-4">        
                   <label for="adjustment_role" class="form-label">Choose role</label>
                   <select id="adjustment_role" class="form-select" name="role">
@@ -2459,10 +2608,11 @@ const datasync = `
               <table id="adjustmentTable" class="table table-hover align-middle table-bordered table-striped">
                 <thead class="table-dark">
                   <tr>
-                    <th>ID</th>
+                    
+					<th>FY</th>
                     <th>Department</th>
                     <th>Role</th>
-                    <th>FY Year</th>
+                    <th>Designation</th>
                     <th>Employee </th>
                     <th>Achieved</th>
                     <th>Incentive Amount</th>
@@ -2472,15 +2622,16 @@ const datasync = `
                 </thead>
                 <tbody>
                   <tr>
-                    <td>1</td>
-                    <td>IT</td>
-                    <td>Programmer</td>
-                    <td>2024-2025</td>
-                    <td>EMP001 - John Doe</td>
-                    <td>95%</td>
-                    <td>920,000.00</td>
+                    
+                    <td>FY 25-26</td>
+					<td>Tech</td>
+                    <td>Manager</td>
+                    <td>Group Manager</td>
+                    <td>AS14-Rahul</td>
+                    <td>100%</td>
+                    <td>4,47,668.00</td>
                     <td>
-                      <input type="text" class="form-control form-control-sm" value="922,800.00">
+                      <input type="text" class="form-control form-control-sm" value="4,50,000.00">
                     </td>
                     <td>
 					  
@@ -2493,55 +2644,15 @@ const datasync = `
                     </td>
                   </tr>
                   <tr>
-                    <td>2</td>
-                    <td>IT</td>
-                    <td>Sr.Programmer</td>
-                    <td>2024-2025</td>
-                    <td>EMP002 - Jane Smith</td>
-                    <td>90%</td>
-                    <td>924,000.00</td>
-                    <td>
-                      <input type="text" class="form-control form-control-sm" value="90.00" disabled>
-                    </td>
-                    <td>
-                      <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
-						<i class="bi bi-pencil-square"></i>
-					  </button>
-					  <button class="btn btn-sm btn-outline-info" title="History">
-						<i class="bi bi-clock-history"></i>
-					  </button>
-                    </td>
-                  </tr>
-				  <tr>
-                    <td>3</td>
-                    <td>IT</td>
-                    <td>Jr.Programmer</td>
-                    <td>2024-2025</td>
-                    <td>EMP005 - Rani</td>
-                    <td>90%</td>
-                    <td>914,000.00</td>
-                    <td>
-                      <input type="text" class="form-control form-control-sm" value="90.00" disabled>
-                    </td>
-                    <td>
-                      <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
-						<i class="bi bi-pencil-square"></i>
-					  </button>
-					  <button class="btn btn-sm btn-outline-info" title="History">
-						<i class="bi bi-clock-history"></i>
-					  </button>
-                    </td>
-                  </tr>
-				  <tr>
-                    <td>4</td>
-                    <td>IT</td>
-                    <td>Sr.Programmer</td>
-                    <td>2024-2025</td>
-                    <td>EMP027 - Ravi</td>
+                    <td>FY 25-26</td>
+					<td>Tech</td>
+                    <td>Manager</td>
+                    <td>Sr.Manager</td>
+                    <td>AS334-Sam</td>
                     <td>100%</td>
-                    <td>930,000.00</td>
+                    <td>4,47,668.00</td>
                     <td>
-                      <input type="text" class="form-control form-control-sm" value="929,500.00">
+                      <input type="text" class="form-control form-control-sm" value="0.00" >
                     </td>
                     <td>
                       <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
@@ -2552,6 +2663,27 @@ const datasync = `
 					  </button>
                     </td>
                   </tr>
+				  <tr>
+                    <td>FY 25-26</td>
+					<td>Tech</td>
+                    <td>Manager</td>
+                    <td>Jr.Manager</td>
+                    <td>AS568-Pradeep</td>
+                    <td>90%</td>
+                    <td>4,02,901.00</td>
+                    <td>
+                      <input type="text" class="form-control form-control-sm" value="0.00" >
+                    </td>
+                    <td>
+                      <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
+						<i class="bi bi-pencil-square"></i>
+					  </button>
+					  <button class="btn btn-sm btn-outline-info" title="History">
+						<i class="bi bi-clock-history"></i>
+					  </button>
+                    </td>
+                  </tr>
+				  
                   <!-- Add more rows as needed -->
                 </tbody>
               </table>
